@@ -1,0 +1,459 @@
+@import url(../fonts/GothamBook.css);
+@import url(../fonts/GothamBold.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /*background: linear-gradient(to right, #47001c, #971132);*/
+    background: linear-gradient(to right, #0e151b, #ec031f, #0e151b);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'arial';
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.user_new {
+    font-family: 'arial';
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 26px;
+    color: white;
+}
+
+.encabezado {
+    font-family: 'arial';
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 26px;
+    color: silver;
+}
+
+.title1 {
+    font-family: 'arial';
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 26px;
+    color: silver;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+h6 {
+    font-size: 12px;
+}
+
+.fecha {
+    font-family: 'arial';
+    letter-spacing: 2px;
+    font-size: 14px;
+    line-height: 20px;
+    padding-top: 15px;
+    color: silver;
+}
+
+a {
+    text-decoration: none;
+    font-family: arial;
+    letter-spacing: 1px;
+}
+
+span {
+    font-family: 'GothamBook';
+    letter-spacing: 1px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+}
+
+.header {
+    background: linear-gradient(to right, #0e151b, #ec031f, #0e151b);
+    height: 35px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.optionsBar {
+    color: #FFF;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.optionsBar span {
+    color: silver;
+    font-size: 11pt;
+    font-family: 'GothamBook';
+    text-transform: uppercase;
+    margin-left: 30px;
+}
+
+.photouser {
+    margin-left: 30px;
+    width: 25px;
+    height: 25px;
+}
+
+.close {
+    width: 25px;
+    height: 25px;
+}
+
+.optionsBar a {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    margin-left: 30px;
+}
+
+nav ul {
+    background: #73737a;
+    list-style: none;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+nav ul>li a {
+    position: relative;
+    text-decoration: none;
+}
+
+nav a {
+    color: #FFF;
+    display: block;
+    font-size: 10pt;
+    font-family: 'GothamBook';
+    padding: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: background .5s;
+    border-right: 1px solid #1c1b4d;
+}
+
+nav .principal>a {
+    background: url(../images/arrow_bottom.png) no-repeat;
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto auto;
+    background-position: 94% center;
+    background-size: 10px;
+}
+
+nav ul li:hover ul {
+    display: block;
+}
+
+nav li ul {
+    background: #73737a;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    align-items: flex-start;
+    border-radius: 0 0 10px 10px;
+}
+
+nav li ul a {
+    position: relative;
+    padding: 10px 30px;
+    border-right: initial;
+}
+
+nav li ul a:hover {
+    background: #e0dada;
+}
+
+nav li ul li:last-child {
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+}
+
+#container {
+    padding: 90px 15px 15px;
+}
+
+
+/*****************************************************************/
+
+.form_register {
+    width: 450px;
+    margin: auto;
+}
+
+.form_register .user_new {
+    color: silver;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.hr {
+    border: 0;
+    background: #ccc;
+    height: 1px;
+    margin: 10px 0;
+    display: block;
+}
+
+form {
+    background: rgba(192, 192, 192, 0.377);
+    margin: auto;
+    padding: 20px 50px;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+}
+
+label {
+    display: block;
+    font-size: 12pt;
+    font-family: 'GothamBook';
+    margin: 15px auto 5px auto;
+}
+
+input,
+select {
+    display: block;
+    width: 100%;
+    font-size: 11pt;
+    padding: 5px;
+    border: 1px solid #85929e;
+    border-radius: 5px;
+    background: silver;
+}
+
+.notitemone option:first-child {
+    display: none;
+}
+
+.btn_save {
+    font-size: 12pt;
+    background: #12a4c6;
+    padding: 10px;
+    color: #FFF;
+    letter-spacing: 1px;
+    border: 0;
+    cursor: pointer;
+    margin: 15px auto;
+}
+
+.alerta {
+    width: 100%;
+    background: rgba(192, 192, 192, 0.377);
+    border-radius: 6px;
+    margin: 20px auto;
+}
+
+.msg_error {
+    color: red;
+}
+
+.msg_save {
+    color: green;
+}
+
+.alerta p {
+    padding: 10px;
+}
+
+/*---------------- Lista de Usuarios -----------------*/
+
+.title {
+    font-size: 31px;
+    display: inline-block;
+    color: silver;
+}
+
+.btn_new {
+    display: inline-block;
+    background: rgba(230, 225, 225, 0.699);
+    color: white;
+    padding: 5px 25px;
+    border-radius: 4px;
+    margin: 20px;
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 12pt;
+    font-family: 'Times New Roman', Times, serif;
+    width: 100%;
+}
+
+table th {
+    text-align: left;
+    padding: 10px;
+    background: #3d7ba881;
+    color: silver;
+}
+
+table tr:nth-child(odd) {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+table td {
+    padding: 10px;
+    color: silver;
+}
+
+.link_edit {
+    color: white;
+    text-decoration: none;
+    background: green;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.link_delete {
+    color: white;
+    text-decoration: none;
+    background: red;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.data_delete {
+    text-align: center;
+}
+
+.data_delete h2 {
+    font-size: 12pt;
+}
+
+.data_delete span {
+    font-weight: bold;
+    color: silver;
+    font-size: 12pt;
+}
+
+.btn_cancel,
+.btn_ok {
+    width: 124px;
+    background: #478ba2;
+    color: white;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 15px;
+    text-decoration: none;
+}
+
+.btn_cancel {
+    background: red;
+}
+
+.btn_ok {
+    background: #42b343;
+}
+
+.data_delete form {
+    background: initial;
+    margin: auto;
+    padding: 20px 50px;
+    border: 0;
+}
+
+/*---------------- Paginador -----------------*/
+.paginador ul {
+    padding: 15px;
+    list-style: none;
+    margin-top: 15PX;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+}
+
+.paginador a,
+.pageSelected {
+    background: white;
+    color: black;
+    border: 1px solid #ddd;
+    padding: 5px;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+    width: 35px;
+    text-decoration: none;
+}
+
+.paginador a:hover {
+    background: #ddd;
+}
+
+.pageSelected {
+    color: #FFF;
+    background: #428bca;
+    border: 1px solid #428bca;
+}
+
+/*--------------- Buscador ---------------*/
+
+.form_search {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    float: right;
+    background: initial;
+    padding: 5px;
+    border-radius: 10px;
+    height: 40px;
+}
+
+.form_search .btn_search {
+    background: #73737a;
+    color: white;
+    padding: 0 20px;
+    border: 0;
+    cursor: pointer;
+    margin-left: 10px;
+}
