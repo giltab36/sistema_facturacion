@@ -9,7 +9,7 @@ if (empty($_SESSION['active'])) {
 <header>
     <div class="header">
 
-        <h1 class="encabezado">LuzJos Confecciones</h1>
+        <h1 class="encabezado">Snow Informatic</h1>
         <div class="optionsBar">
             <p class="fecha">Paraguay, <?php echo fechaC(); ?></p>
             <span>|</span>
