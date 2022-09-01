@@ -1,4 +1,9 @@
 <?php
+session_start();
+if ($_SESSION['rol'] != 1)
+{
+    header("location: ./");
+}
 include "../conexion.php";
 
 if (!empty($_POST)) {
@@ -14,6 +19,7 @@ if (!empty($_POST)) {
         $rol = $_POST['rol'];
 
         $query = mysqli_query($conection, "SELECT * FROM usuario WHERE usuario = '$user' OR correo = '$email'");
+        mysqli_close($conection);
         $result = mysqli_fetch_array($query);
 
         if ($result > 0) {
@@ -61,8 +67,9 @@ if (!empty($_POST)) {
                 <label for="rol">Tipo de Usuario</label>
 
                 <?php
-                $query_rol = mysqli_query($conection, "SELECT * FROM rol");
-                $result_rol = mysqli_num_rows($query_rol);
+                    $query_rol = mysqli_query($conection, "SELECT * FROM rol");
+                    mysqli_close($conection);
+                    $result_rol = mysqli_num_rows($query_rol);
                 ?>
 
                 <select name="rol" id="rol">

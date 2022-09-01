@@ -1,11 +1,15 @@
 <?php
-
+session_start();
+if ($_SESSION['rol'] != 1) {
+    header("location: ./");
+}
 include "../conexion.php";
 
 if (!empty($_POST)) {
 
     if ($_POST['id_usuario'] == 1) {
         header('location: lista_usuario.php');
+        mysqli_close($conection);
     }
     $idusuario = $_POST['id_usuario'];
     //$query_delete = mysqli_query($conection, "DELETE FROM usuario WHERE id_usuario = $idusuario");
@@ -20,10 +24,12 @@ if (!empty($_POST)) {
 
 if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
     header('location: lista_usuario.php');
+    mysqli_close($conection);
 } else {
     $idusuario = $_REQUEST['id'];
 
     $query = mysqli_query($conection, "SELECT u.nombre, u.usuario, r.rol FROM usuario u INNER JOIN rol r ON u.rol = r.id_rol WHERE u.id_usuario = $idusuario");
+    mysqli_close($conection);
     $result = mysqli_num_rows($query);
 
     if ($result > 0) {

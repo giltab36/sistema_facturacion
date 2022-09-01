@@ -1,4 +1,8 @@
 <?php
+session_start();
+if ($_SESSION['rol'] != 1) {
+    header("location: ./");
+}
 include "../conexion.php";
 
 if (!empty($_POST)) {
@@ -21,9 +25,9 @@ if (!empty($_POST)) {
             $alert = '<p class="msg_error">El correo o el usuario ya existe.</p>';
         } else {
 
-            if(empty($_POST['clave'])){
+            if (empty($_POST['clave'])) {
                 $sql_update = mysqli_query($conection, "UPDATE usuario SET nombre = '$nombre', correo = '$email', usuario = '$user', rol = '$rol' WHERE id_usuario = $idusuario");
-            }else{
+            } else {
                 $sql_update = mysqli_query($conection, "UPDATE usuario SET nombre = '$nombre', correo = '$email', clave = '$pass', usuario = '$user', rol = '$rol' WHERE id_usuario = $idusuario");
             }
 
@@ -34,6 +38,7 @@ if (!empty($_POST)) {
             }
         }
     }
+    mysqli_close($conection);
 }
 
 
@@ -44,6 +49,7 @@ if (empty($_GET['id'])) {
 
 $iduser = $_GET['id'];
 $sql = mysqli_query($conection, "SELECT u.id_usuario, u.nombre, u.correo, u.usuario, (u.rol) AS id_rol, (r.rol) AS rol FROM usuario u INNER JOIN rol r ON u.rol = r.id_rol WHERE id_usuario = $iduser");
+mysqli_close($conection);
 $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {
@@ -89,7 +95,7 @@ if ($result_sql == 0) {
 
             <form action="" method="post">
 
-                    <input type="hidden" name="id_usuario" value="<?php echo $iduser; ?>">
+                <input type="hidden" name="id_usuario" value="<?php echo $iduser; ?>">
 
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo" value="<?php echo $nombre; ?>">
@@ -105,7 +111,9 @@ if ($result_sql == 0) {
 
                 <label for="rol">Tipo de Usuario</label>
                 <?php
+                include "../conexion.php";
                 $query_rol = mysqli_query($conection, "SELECT * FROM rol");
+                mysqli_close($conection);
                 $result_rol = mysqli_num_rows($query_rol);
                 ?>
                 <select name="rol" id="rol" class="notitemone">

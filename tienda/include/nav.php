@@ -1,13 +1,17 @@
 <nav>
     <ul>
         <li><a href="index.php">Inicio</a></li>
-        <li class="principal">
-            <a href="">Usuarios</a>
-            <ul>
-                <li><a href="registro_usuario.php">Nuevo Usuario</a></li>
-                <li><a href="lista_usuario.php">Lista de Usuarios</a></li>
-            </ul>
-        </li>
+        <?php
+        if ($_SESSION['rol'] == 1) {
+        ?>
+            <li class="principal">
+                <a href="">Usuarios</a>
+                <ul>
+                    <li><a href="registro_usuario.php">Nuevo Usuario</a></li>
+                    <li><a href="lista_usuario.php">Lista de Usuarios</a></li>
+                </ul>
+            </li>
+        <?php } ?>
         <li class="principal">
             <a href="">Clientes</a>
             <ul>

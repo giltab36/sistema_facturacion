@@ -13,7 +13,7 @@ include "../conexion.php";
 <head>
     <meta charset="UTF-8">
     <?php include "include/script.php"; ?>
-    <title>Lista de Usuarios</title>
+    <title>Lista de Clientes</title>
 </head>
 
 <body>
@@ -21,8 +21,8 @@ include "../conexion.php";
     <section id="container">
 
 
-        <h1 class="title">Listado de Usuarios</h1>
-        <a href="registro_usuario.php" class="btn_new">Crear Usuario</a>
+        <h1 class="title">Listado de Clientes</h1>
+        <a href="registro_usuario.php" class="btn_new">Crear Cliente</a>
 
         <form action="buscar_usuario.php" method="GET" class="form_search">
             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
