@@ -16,7 +16,7 @@ if (!empty($_POST)) {
         $usuario_id = $_SESSION['idUser'];
 
         $result = 0;
-        if (is_numeric($cedula)) {
+        if ((is_numeric($cedula)) and $cedula !=0){
             $query = mysqli_query($conection, "SELECT * FROM cliente WHERE cedula = '$cedula'");
             $result = mysqli_fetch_array($query);
         }
