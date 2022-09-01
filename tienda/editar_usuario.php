@@ -11,7 +11,7 @@ if (!empty($_POST)) {
         $alert = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
-        $idusuario = $_POST['id_usuario'];
+        $idusuario = $_POST['id'];
         $nombre = $_POST['nombre'];
         $user = $_POST['usuario'];
         $email = $_POST['correo'];
@@ -20,6 +20,7 @@ if (!empty($_POST)) {
 
         $query = mysqli_query($conection, "SELECT * FROM usuario WHERE (usuario = '$user' AND id_usuario != $idusuario) OR (correo = '$email' AND id_usuario != $idusuario)");
         $result = mysqli_fetch_array($query);
+        //$result = count($result);
 
         if ($result > 0) {
             $alert = '<p class="msg_error">El correo o el usuario ya existe.</p>';
@@ -38,16 +39,16 @@ if (!empty($_POST)) {
             }
         }
     }
-    mysqli_close($conection);
 }
 
 
 //Mostrar Datos
-if (empty($_GET['id'])) {
+if (empty($_REQUEST['id'])) {
     header('Location: lista_usuario.php');
+    mysqli_close($conection);
 }
 
-$iduser = $_GET['id'];
+$iduser = $_REQUEST['id'];
 $sql = mysqli_query($conection, "SELECT u.id_usuario, u.nombre, u.correo, u.usuario, (u.rol) AS id_rol, (r.rol) AS rol FROM usuario u INNER JOIN rol r ON u.rol = r.id_rol WHERE id_usuario = $iduser");
 mysqli_close($conection);
 $result_sql = mysqli_num_rows($sql);
@@ -95,7 +96,7 @@ if ($result_sql == 0) {
 
             <form action="" method="post">
 
-                <input type="hidden" name="id_usuario" value="<?php echo $iduser; ?>">
+                <input type="hidden" name="id" value="<?php echo $iduser; ?>">
 
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo" value="<?php echo $nombre; ?>">
