@@ -21,12 +21,12 @@ include "../conexion.php";
     <section id="container">
 
 
-        <h1 class="title">Listado de Usuarios</h1>
-        <a href="registro_usuario.php" class="btn_new">Crear Usuario</a>
+        <h1 class="title"><i class="fa-solid fa-users"></i> Listado de Usuarios</h1>
+        <a href="registro_usuario.php" class="btn_new"><i class="fa-solid fa-user-plus"></i> Crear Usuario</a>
 
         <form action="buscar_usuario.php" method="GET" class="form_search">
             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
-            <input type="submit" value="Buscar" class="btn_search">
+            <button type="submit" class="btn_search"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
 
         <table>
@@ -70,11 +70,11 @@ include "../conexion.php";
                         <td><?php echo $data['correo'] ?></td>
                         <td><?php echo $data['rol'] ?></td>
                         <td>
-                            <a href="editar_usuario.php?id=<?php echo $data['id_usuario'] ?>" class="link_edit"><i class="fas fa-pen">Editar</i></a>
+                            <a href="editar_usuario.php?id=<?php echo $data['id_usuario'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i>Editar</a>
                             <?php
                             if ($data['id_usuario'] != 1) { ?>
                                 |
-                                <a href="eliminar_usuario.php?id=<?php echo $data['id_usuario'] ?>" class="link_delete"><i class="fas fa-trash">Eliminar</i></a>
+                                <a href="eliminar_usuario.php?id=<?php echo $data['id_usuario'] ?>" class="link_delete"><i class="fa-regular fa-trash-can"></i> Eliminar</a>
                             <?php } ?>
                         </td>
                     </tr>

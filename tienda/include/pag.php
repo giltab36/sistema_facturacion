@@ -3,8 +3,8 @@
         <?php
         if ($pagina != 1) {
         ?>
-            <li><a href="?pagina=<?php echo 1; ?>">|< </a</li>
-            <li><a href="?pagina=<?php echo $pagina - 1; ?>"><<</a></li>
+            <li><a href="?pagina=<?php echo 1; ?>"><i class="fa-solid fa-backward-step"></i></a</li>
+            <li><a href="?pagina=<?php echo $pagina - 1; ?>"><i class="fa-solid fa-backward"></i></a></li>
         <?php
         }
         for ($i = 1; $i <= $total_paginas; $i++) {
@@ -18,8 +18,8 @@
 
         if ($pagina != $total_paginas) {
         ?>
-            <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-            <li><a hrefa="?pagina=<?php echo $total_paginas; ?>">>|</a></li>
+            <li><a href="?pagina=<?php echo $pagina + 1; ?>"><i class="fa-solid fa-forward"></i></a></li>
+            <li><a hrefa="?pagina=<?php echo $total_paginas; ?>"><i class="fa-solid fa-forward-step"></i></a></li>
         <?php } ?>
     </ul>
 </div>

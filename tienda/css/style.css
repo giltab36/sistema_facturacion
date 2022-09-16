@@ -201,6 +201,7 @@ nav li ul a {
     position: relative;
     padding: 10px 30px;
     border-right: initial;
+    text-decoration: none;
 }
 
 nav li ul a:hover {
@@ -222,6 +223,7 @@ nav li ul li:last-child {
 .form_register {
     width: 450px;
     margin: auto;
+    margin-top: 20px;
 }
 
 .form_register .user_new {
@@ -275,8 +277,10 @@ select {
     color: #FFF;
     letter-spacing: 1px;
     border: 0;
+    border-radius: 5px;
     cursor: pointer;
     margin: 15px auto;
+    display: block;
 }
 
 .alerta {
@@ -358,6 +362,7 @@ table td {
 
 .data_delete {
     text-align: center;
+    margin-top: 20px;
 }
 
 .data_delete h2 {
@@ -381,6 +386,7 @@ table td {
     cursor: pointer;
     margin: 15px;
     text-decoration: none;
+    border: 0;
 }
 
 .btn_cancel {
@@ -456,4 +462,5 @@ table td {
     border: 0;
     cursor: pointer;
     margin-left: 10px;
+    border-radius: 5px;
 }

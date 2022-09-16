@@ -16,7 +16,7 @@ if (!empty($_POST)) {
         $usuario_id = $_SESSION['idUser'];
 
         $result = 0;
-        if ((is_numeric($cedula)) and $cedula !=0){
+        if ((is_numeric($cedula)) and $cedula != 0) {
             $query = mysqli_query($conection, "SELECT * FROM cliente WHERE cedula = '$cedula'");
             $result = mysqli_fetch_array($query);
         }
@@ -50,7 +50,7 @@ if (!empty($_POST)) {
     <section id="container">
 
         <div class="form_register">
-            <h1 class="user_new">Registrar Clientes</h1>
+            <h1 class="user_new"><i class="fa-solid fa-user-plus"></i> Registrar Clientes</h1>
             <hr class="hr">
             <div class="alerta"><?php echo isset($alert) ? $alert : ''; ?></div>
 
@@ -60,12 +60,12 @@ if (!empty($_POST)) {
                 <input type="number" name="cedula" id="cedula" placeholder="Numero de Cedula">
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo">
-                <label for="telefono">Telefono</label>
+                <label for="telefono">Teléfono</label>
                 <input type="number" name="telefono" id="telefono" placeholder="Numero de telefono">
-                <label for="direccion">Direccion</label>
+                <label for="direccion">Dirección</label>
                 <input type="text" name="direccion" id="direccion" placeholder="Direccion completa">
 
-                <input type="submit" value="Registrar Cliente" class="btn_save">
+                <button type="submit" class="btn_save"><i class="fa-regular fa-floppy-disk"></i> Registrar</button>
 
             </form>
 

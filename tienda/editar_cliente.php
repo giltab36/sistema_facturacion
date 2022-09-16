@@ -80,7 +80,7 @@ if ($result_sql == 0) {
     <section id="container">
 
         <div class="form_register">
-            <h1 class="user_new">Editar Cliente</h1>
+            <h1 class="user_new"><i class="fa-regular fa-pen-to-square"></i> Editar Cliente</h1>
             <hr class="hr">
             <div class="alerta"><?php echo isset($alert) ? $alert : ''; ?></div>
 
@@ -96,7 +96,8 @@ if ($result_sql == 0) {
                 <label for="direccion">Direccion</label>
                 <input type="text" name="direccion" id="direccion" placeholder="Direccion completa" value="<?php echo $direccion; ?>">
 
-                <input type="submit" value="Modificar" class="btn_save">
+                <button type="submit" class="btn_save"><i class="fa-regular fa-pen-to-square"></i> Modificar</button>
+
 
             </form>
 

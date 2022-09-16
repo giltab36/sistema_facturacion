@@ -57,14 +57,17 @@ if (empty($_REQUEST['id']) || $_REQUEST['id'] == 1) {
     <?php include "include/header.php"; ?>
     <section id="container">
         <div class="data_delete">
+            <i class="fa-solid fa-user-xmark fa-7x" style="color: silver;"></i>
+            <br>
+            <br>
             <h2><b>¿Seguro que desea eliminar estos datos?</b></h2>
             <p><b>Nombre:</b> <span><?php echo $nombre; ?></span></p>
             <p><b>Usuario:</b> <span><?php echo $usuario; ?></span></p>
             <p><b>Tipo de usuario:</b> <span><?php echo $rol; ?></span></p>
             <form action="" method="POST">
-                <a href="lista_usuario.php" class="btn_cancel">Cancelar</a>
-                <input type="submit" value="Aceptar" class="btn_ok">
                 <input type="hidden" name="id_usuario" value="<?php echo $idusuario; ?>">
+                <a href="lista_usuario.php" class="btn_cancel"><i class="fa-solid fa-xmark"></i> Cancelar</a>
+                <button type="submit" class="btn_ok"><i class="fa-solid fa-check"></i> Eliminar</button>
             </form>
         </div>
     </section>

@@ -50,7 +50,7 @@ if (!empty($_POST)) {
     <section id="container">
 
         <div class="form_register">
-            <h1 class="user_new">Registrar Usuario</h1>
+            <h1 class="user_new"><i class="fa-solid fa-user-plus"></i> Registrar Usuario</h1>
             <hr class="hr">
             <div class="alerta"><?php echo isset($alert) ? $alert : ''; ?></div>
 
@@ -83,7 +83,7 @@ if (!empty($_POST)) {
                     }
                     ?>
                 </select>
-                <input type="submit" value="Registrar" class="btn_save">
+                <button type="submit" class="btn_save"><i class="fa-regular fa-floppy-disk"></i> Registrar</button>
 
             </form>
 

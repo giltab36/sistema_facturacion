@@ -31,7 +31,7 @@ include "../conexion.php";
 
         <form action="buscar_usuario.php" method="GET" class="form_search">
             <input type="text" class="busq" name="busqueda" id="busqueda" placeholder="Buscar" value="<?php echo $busqueda; ?>">
-            <input type="submit" value="Buscar" class="btn_search">
+            <button type="submit" class="btn_search"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
 
         <table>
@@ -84,11 +84,11 @@ include "../conexion.php";
                         <td><?php echo $data['correo'] ?></td>
                         <td><?php echo $data['rol'] ?></td>
                         <td>
-                            <a href="editar_usuario.php?id=<?php echo $data['id_usuario'] ?>" class="link_edit"><i class="fas fa-pen">Editar</i></a>
+                            <a href="editar_usuario.php?id=<?php echo $data['id_usuario'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i>Editar</a>
                             <?php
                             if ($data['id_usuario'] != 1) { ?>
                                 |
-                                <a href="eliminar_usuario.php?id=<?php echo $data['id_usuario'] ?>" class="link_delete"><i class="fas fa-trash">Eliminar</i></a>
+                                <a href="eliminar_usuario.php?id=<?php echo $data['id_usuario'] ?>" class="link_delete"><i class="fa-regular fa-trash-can"></i> Eliminar</a>
                             <?php } ?>
                         </td>
                     </tr>
@@ -108,10 +108,8 @@ include "../conexion.php";
                     <?php
                     if ($pagina != 1) {
                     ?>
-                        <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|< </a</li>
-                        <li><a href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo $busqueda; ?>">
-                                << </a>
-                        </li>
+                        <li><a href="?pagina=<?php echo 1; ?>"><i class="fa-solid fa-backward-step"></i></a></li>
+                        <li><a href="?pagina=<?php echo $pagina - 1; ?>"><i class="fa-solid fa-backward"></i></a></li>
                     <?php
                     }
                     for ($i = 1; $i <= $total_paginas; $i++) {
@@ -125,8 +123,8 @@ include "../conexion.php";
 
                     if ($pagina != $total_paginas) {
                     ?>
-                        <li><a href="?pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo $busqueda; ?>">>></a></li>
-                        <li><a hrefa="?pagina=<?php echo $total_paginas; ?>&busqueda=<?php echo $busqueda; ?>">>|</a></li>
+                        <li><a href="?pagina=<?php echo $pagina + 1; ?>"><i class="fa-solid fa-forward"></i></a></li>
+                        <li><a hrefa="?pagina=<?php echo $total_paginas; ?>"><i class="fa-solid fa-forward-step"></i></a></li>
                     <?php } ?>
                 </ul>
             </div>

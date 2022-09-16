@@ -90,7 +90,7 @@ if ($result_sql == 0) {
     <section id="container">
 
         <div class="form_register">
-            <h1 class="user_new">Editar Usuario</h1>
+            <h1 class="user_new"><i class="fa-regular fa-pen-to-square"></i> Editar Usuario</h1>
             <hr class="hr">
             <div class="alerta"><?php echo isset($alert) ? $alert : ''; ?></div>
 
@@ -108,7 +108,7 @@ if ($result_sql == 0) {
                 <input type="email" name="correo" id="correo" placeholder="ejemplo@gmail.com" value="<?php echo $email; ?>">
 
                 <label for="clave">Contraseña</label>
-                <input type="password" name="clave" id="clave" placeholder="Contraseña" readonly>
+                <input type="password" name="clave" id="clave" placeholder="Contraseña">
 
                 <label for="rol">Tipo de Usuario</label>
                 <?php
@@ -129,7 +129,7 @@ if ($result_sql == 0) {
                     }
                     ?>
                 </select>
-                <input type="submit" value="Modificar" class="btn_save">
+                <button type="submit" class="btn_save"><i class="fa-regular fa-pen-to-square"></i> Modificar</button>
 
             </form>
 

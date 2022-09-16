@@ -1,8 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['rol'] != 1) {
-    header("location: ./");
-}
+
 include "../conexion.php";
 
 ?>
@@ -22,39 +20,31 @@ include "../conexion.php";
         <?php
         $busqueda = strtolower($_REQUEST['busqueda']);
         if (empty($busqueda)) {
-            header("location: lista_usuario.php");
+            header("location: lista_cliente.php");
         }
         ?>
 
-        <h1 class="title">Listado de Usuarios</h1>
-        <a href="registro_usuario.php" class="btn_new">Crear Usuario</a>
+        <h1 class="title">Listado de Clientes</h1>
+        <a href="registro_cliente.php" class="btn_new">Crear Cliente</a>
 
-        <form action="buscar_usuario.php" method="GET" class="form_search">
+        <form action="buscar_cliente.php" method="GET" class="form_search">
             <input type="text" class="busq" name="busqueda" id="busqueda" placeholder="Buscar" value="<?php echo $busqueda; ?>">
-            <input type="submit" value="Buscar" class="btn_search">
+            <button type="submit" class="btn_search"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
 
         <table>
             <tr>
                 <th><b>Nº</b></th>
+                <th><b>Cédula</b></th>
                 <th><b>Nombre</b></th>
-                <th><b>Usuario</b></th>
-                <th><b>Correo</b></th>
-                <th><b>Rol</b></th>
+                <th><b>Teléfono</b></th>
+                <th><b>Dirección</b></th>
                 <th><b>Opciones</b></th>
             </tr>
             <?php
             //Paginador & Buscador
-            $rol = '';
-            if ($busqueda == 'administrador') {
-                $rol = "OR rol LIKE '%1%'";
-            } else if ($busqueda == 'supervisor') {
-                $rol = "OR rol LIKE '%2%'";
-            } else if ($busqueda == 'vendedor') {
-                $rol = "OR rol LIKE '%3%'";
-            }
 
-            $sql_register = mysqli_query($conection, "SELECT COUNT(*) AS total_registro FROM usuario WHERE( nombre LIKE '%$busqueda%' OR correo LIKE '%$busqueda%' OR usuario LIKE '%$busqueda%' $rol) AND estatus = 1");
+            $sql_register = mysqli_query($conection, "SELECT COUNT(*) AS total_registro FROM cliente WHERE( cedula LIKE '%$busqueda%' OR nombre LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%' OR direccion LIKE '%$busqueda%') AND estatus = 1");
             $result_register = mysqli_fetch_array($sql_register);
             $total_registro = $result_register['total_registro'];
 
@@ -69,7 +59,7 @@ include "../conexion.php";
             $desde = ($pagina - 1) * $por_pagina;
             $total_paginas = ceil($total_registro / $por_pagina);
 
-            $query = mysqli_query($conection, "SELECT u.id_usuario, u.nombre, u.correo, u.usuario, r.rol FROM usuario u INNER JOIN rol r ON u.rol = r.id_rol WHERE (u.nombre LIKE '%$busqueda%' OR u.correo LIKE '%$busqueda%' OR u.usuario LIKE '%$busqueda%' OR r.rol LIKE '%$busqueda%') AND estatus = 1 ORDER BY id_usuario ASC LIMIT $desde, $por_pagina");
+            $query = mysqli_query($conection, "SELECT * FROM cliente WHERE (cedula LIKE '%$busqueda%' OR nombre LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%' OR direccion LIKE '%$busqueda%') AND estatus = 1 ORDER BY id_cliente ASC LIMIT $desde, $por_pagina");
             mysqli_close($conection);
             $result = mysqli_num_rows($query);
 
@@ -79,16 +69,16 @@ include "../conexion.php";
             ?>
                     <tr>
                         <td><?php echo $index++ ?></td>
+                        <td><?php echo $data['cedula'] ?></td>
                         <td><?php echo $data['nombre'] ?></td>
-                        <td><?php echo $data['usuario'] ?></td>
-                        <td><?php echo $data['correo'] ?></td>
-                        <td><?php echo $data['rol'] ?></td>
+                        <td><?php echo $data['telefono'] ?></td>
+                        <td><?php echo $data['direccion'] ?></td>
                         <td>
-                            <a href="editar_usuario.php?id=<?php echo $data['id_usuario'] ?>" class="link_edit"><i class="fas fa-pen">Editar</i></a>
+                            <a href="editar_cliente.php?id=<?php echo $data['id_cliente'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i>Editar</a>
                             <?php
                             if ($data['id_usuario'] != 1) { ?>
                                 |
-                                <a href="eliminar_usuario.php?id=<?php echo $data['id_usuario'] ?>" class="link_delete"><i class="fas fa-trash">Eliminar</i></a>
+                                <a href="eliminar_cliente.php?id=<?php echo $data['id_cliente'] ?>" class="link_delete"><i class="fa-regular fa-trash-can"></i> Eliminar</a>
                             <?php } ?>
                         </td>
                     </tr>
@@ -108,9 +98,8 @@ include "../conexion.php";
                     <?php
                     if ($pagina != 1) {
                     ?>
-                        <li><a href="?pagina=<?php echo 1; ?>&busqueda=<?php echo $busqueda; ?>">|< </a</li>
-                        <li><a href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo $busqueda; ?>">
-                                << </a>
+                        <li><a href="?pagina=<?php echo 1; ?>"><i class="fa-solid fa-backward-step"></i></a></li>
+                        <li><a href="?pagina=<?php echo $pagina - 1; ?>"><i class="fa-solid fa-backward"></i></a></li>
                         </li>
                     <?php
                     }
@@ -125,8 +114,8 @@ include "../conexion.php";
 
                     if ($pagina != $total_paginas) {
                     ?>
-                        <li><a href="?pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo $busqueda; ?>">>></a></li>
-                        <li><a hrefa="?pagina=<?php echo $total_paginas; ?>&busqueda=<?php echo $busqueda; ?>">>|</a></li>
+                        <li><a href="?pagina=<?php echo $pagina + 1; ?>"><i class="fa-solid fa-forward"></i></a></li>
+                        <li><a hrefa="?pagina=<?php echo $total_paginas; ?>"><i class="fa-solid fa-forward-step"></i></a></li>
                     <?php } ?>
                 </ul>
             </div>
