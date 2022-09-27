@@ -19,8 +19,8 @@ include "../conexion.php";
     <section id="container">
 
 
-        <h1 class="title"><i class="fa-solid fa-list-check"></i> Listado de Ventas</h1>
-        <a href="registro_cliente.php" class="btn_new"><i class="fa-solid fa-cart-plus"></i> Crear Venta</a>
+        <h1 class="title"><i class="fa-solid fa-boxes-stacked"></i> Listado de Productos</h1>
+        <a href="registro_cliente.php" class="btn_new"><i class="fa-solid fa-user-plus"></i> Agregar Producto</a>
 
         <form action="buscar_cliente.php" method="GET" class="form_search">
             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">

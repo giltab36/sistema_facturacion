@@ -29,15 +29,17 @@
         <li class="principal">
             <a href=""><i class="fa-solid fa-boxes-packing"></i> Productos</a>
             <ul>
-                <li><a href="registro_producto.php"><i class="fa-solid fa-truck-ramp-box"></i> Nuevo Producto</a></li>
-                <li><a href="lista_producto.php"><i class="fa-solid fa-boxes-stacked"></i> Lista de Productos</a></li>
+                <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
+                    <li><a href="registro_producto.php"><i class="fa-solid fa-truck-ramp-box"></i> Nuevo Producto</a></li>
+                <?php } ?>
+                <li><a href="lista_producto_copy.php"><i class="fa-solid fa-boxes-stacked"></i> Lista de Productos</a></li>
             </ul>
         </li>
         <li class="principal">
             <a href=""><i class="fa-solid fa-dollar-sign"></i> Ventas</a>
             <ul>
                 <li><a href="registro_venta.php"><i class="fa-solid fa-cart-plus"></i> Nuevo Venta</a></li>
-                <li><a href="lista_ventas.php"><i class="fa-solid fa-list-check"></i> Ventas</a></li>
+                <li><a href="lista_venta.php"><i class="fa-solid fa-list-check"></i> Ventas</a></li>
             </ul>
         </li>
     </ul>

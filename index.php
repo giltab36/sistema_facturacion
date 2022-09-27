@@ -66,7 +66,6 @@ if (!empty($_SESSION['active'])) {
             <input type="password" name="clave" placeholder="Contraseña">
             <div class="alert"><b><?php echo isset($alert) ? $alert : ''; ?></b></div>
             <input type="submit" value="Ingresar">
-            <a href="#">Olvidaste tu contraseña?</a>
 
         </form>
     </div>

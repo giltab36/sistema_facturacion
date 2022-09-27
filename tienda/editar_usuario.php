@@ -49,7 +49,7 @@ if (empty($_REQUEST['id'])) {
 }
 
 $iduser = $_REQUEST['id'];
-$sql = mysqli_query($conection, "SELECT u.id_usuario, u.nombre, u.correo, u.usuario, (u.rol) AS id_rol, (r.rol) AS rol FROM usuario u INNER JOIN rol r ON u.rol = r.id_rol WHERE id_usuario = $iduser");
+$sql = mysqli_query($conection, "SELECT u.id_usuario, u.nombre, u.correo, u.usuario, (u.rol) AS id_rol, (r.rol) AS rol FROM usuario u INNER JOIN rol r ON u.rol = r.id_rol WHERE id_usuario = $iduser AND estatus = 1");
 mysqli_close($conection);
 $result_sql = mysqli_num_rows($sql);
 
