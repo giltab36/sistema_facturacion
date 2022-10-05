@@ -12,6 +12,24 @@ body {
     background: linear-gradient(to right, #0e151b, #ec031f, #0e151b);
 }
 
+.right {
+    transform: translateY(-200px)
+}
+
+.right img {
+    width: 450px;
+    padding-bottom: 25px;
+}
+
+.right {
+    transform: translateY(0);
+}
+
+.right img {
+    width: 300px;
+    margin-top: 40px;
+}
+
 h1,
 h2,
 h3,

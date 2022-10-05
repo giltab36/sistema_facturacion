@@ -1,5 +1,5 @@
 <?php
-	session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +14,9 @@
 	<?php include "include/header.php"; ?>
 	<section id="container">
 		<h1 class="title1">Bienvenido al sistema</h1>
+		<div class="right">
+			<img src="./images/fondo2.png">
+		</div>
 	</section>
 
 

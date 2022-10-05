@@ -54,11 +54,10 @@ if (!empty($_SESSION['active'])) {
     <link rel="icon" type="image/png" href="./images/logo.png" sizes="16x16">
 </head>
 
-<body>
+<body style="background: url('./images/fondo.jpg') no-repeat; background-size: cover; background-position: center;">
 
     <div class="content">
         <form action="" method="post">
-
             <h3>Iniciar Sesión</h3>
             <img src="./images/login2.png" alt="Login">
 
