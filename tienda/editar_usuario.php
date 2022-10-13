@@ -20,8 +20,7 @@ if (!empty($_POST)) {
 
         $query = mysqli_query($conection, "SELECT * FROM usuario WHERE (usuario = '$user' AND id_usuario != $idusuario) OR (correo = '$email' AND id_usuario != $idusuario)");
         $result = mysqli_fetch_array($query);
-        //$result = count($result);
-
+        
         if ($result > 0) {
             $alert = '<p class="msg_error">El correo o el usuario ya existe.</p>';
         } else {

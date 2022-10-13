@@ -15,7 +15,7 @@ session_start();
 	<section id="container">
 		<h1 class="title1">Bienvenido al sistema</h1>
 		<div class="right">
-			<img src="./images/fondo2.png">
+			<img src="./img/logo.png">
 		</div>
 	</section>
 
