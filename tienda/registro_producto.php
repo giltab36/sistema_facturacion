@@ -54,7 +54,7 @@ if (!empty($_POST)) {
                 <label for="proveedor">Proveedor:</label>
 
                 <?php
-                $query_proveedor = mysqli_query($conection, "SELECT cod_proveedor, proveedor FROM proveedor WHERE estatus = 1 ORDER BY proveedor ASC");
+                $query_proveedor = mysqli_query($conection, "SELECT cod_producto, proveedor FROM proveedor WHERE estatus = 1 ORDER BY proveedor ASC");
                 $result_proveedor = mysqli_num_rows($query_proveedor);
                 mysqli_close($conection)
                 ?>
@@ -64,7 +64,7 @@ if (!empty($_POST)) {
                     if ($result_proveedor > 0) {
                         while ($proveedor = mysqli_fetch_array($query_proveedor)) {
                     ?>
-                            <option value="<?php echo $proveedor['cod_proveedor']; ?>"><?php echo $proveedor['proveedor']; ?></option>
+                            <option value="<?php echo $proveedor['cod_producto']; ?>"><?php echo $proveedor['proveedor']; ?></option>
                     <?php
                         }
                     }

@@ -32,7 +32,7 @@
                 <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
                     <li><a href="registro_producto.php"><i class="fa-solid fa-truck-ramp-box"></i> Nuevo Producto</a></li>
                 <?php } ?>
-                <li><a href="lista_producto_copy.php"><i class="fa-solid fa-boxes-stacked"></i> Lista de Productos</a></li>
+                <li><a href="lista_producto.php"><i class="fa-solid fa-boxes-stacked"></i> Lista de Productos</a></li>
             </ul>
         </li>
         <li class="principal">
