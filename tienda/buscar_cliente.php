@@ -10,7 +10,7 @@ include "../conexion.php";
 <head>
     <meta charset="UTF-8">
     <?php include "include/script.php"; ?>
-    <title>Lista de Usuarios</title>
+    <title>Lista de Cliente</title>
 </head>
 
 <body>
@@ -25,7 +25,7 @@ include "../conexion.php";
         ?>
 
         <h1 class="title">Listado de Clientes</h1>
-        <a href="registro_cliente.php" class="btn_new">Crear Cliente</a>
+        <a href="registro_cliente.php" class="btn_new"><i class="fa-solid fa-user-plus"></i> Crear Cliente</a>
 
         <form action="buscar_cliente.php" method="GET" class="form_search">
             <input type="text" class="busq" name="busqueda" id="busqueda" placeholder="Buscar" value="<?php echo $busqueda; ?>">
@@ -76,7 +76,7 @@ include "../conexion.php";
                         <td>
                             <a href="editar_cliente.php?id=<?php echo $data['id_cliente'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i>Editar</a>
                             <?php
-                            if ($data['id_usuario'] != 1) { ?>
+                            if ($data['id_cliente'] != 1) { ?>
                                 |
                                 <a href="eliminar_cliente.php?id=<?php echo $data['id_cliente'] ?>" class="link_delete"><i class="fa-regular fa-trash-can"></i> Eliminar</a>
                             <?php } ?>

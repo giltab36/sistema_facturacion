@@ -1,7 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['rol'] != 1)
-{
+if ($_SESSION['rol'] != 1) {
     header("location: ./");
 }
 include "../conexion.php";
@@ -19,13 +18,14 @@ if (!empty($_POST)) {
         $rol = $_POST['rol'];
 
         $query = mysqli_query($conection, "SELECT * FROM usuario WHERE usuario = '$user' OR correo = '$email'");
-        mysqli_close($conection);
         $result = mysqli_fetch_array($query);
 
         if ($result > 0) {
             $alert = '<p class="msg_error">El correo o el usuario ya existe.</p>';
         } else {
             $query_insert = mysqli_query($conection, "INSERT INTO usuario (nombre, correo, usuario, clave, rol) VALUE ('$nombre', '$email', '$user', '$pass', '$rol')");
+            mysqli_close($conection);
+
             if ($query_insert) {
                 $alert = '<p class="msg_save">Usuario creado correctamente.</p>';
             } else {
@@ -67,9 +67,9 @@ if (!empty($_POST)) {
                 <label for="rol">Tipo de Usuario</label>
 
                 <?php
-                    $query_rol = mysqli_query($conection, "SELECT * FROM rol");
-                    mysqli_close($conection);
-                    $result_rol = mysqli_num_rows($query_rol);
+                $query_rol = mysqli_query($conection, "SELECT * FROM rol");
+                mysqli_close($conection);
+                $result_rol = mysqli_num_rows($query_rol);
                 ?>
 
                 <select name="rol" id="rol">

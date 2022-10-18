@@ -22,7 +22,7 @@ include "../conexion.php";
 
 
         <h1 class="title"><i class="fa-solid fa-users"></i> Listado de Proveedores</h1>
-        <a href="registro_proveedor.php" class="btn_new"><i class="fa-solid fa-user-plus"></i> Agregar Proveedor</a>
+        <a href="registro_proveedor.php" class="btn_new"><i class="fa-solid fa-plus"></i> Agregar Proveedor</a>
 
         <form action="buscar_cliente.php" method="GET" class="form_search">
             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
