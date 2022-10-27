@@ -7,8 +7,9 @@ if ($_SESSION['rol'] != 1 and $_SESSION['rol'] != 2) {
 include "../conexion.php";
 
 if (!empty($_POST)) {
+
     $alert = '';
-    if (empty($_POST['proveedor']) || empty($_POST['descripcion']) || empty($_POST['precio']) || empty($_POST['existencia'])) {
+    if (empty($_POST['proveedor']) || empty($_POST['descripcion']) || empty($_POST['precio']) || $_POST['precio']<= 0 || empty($_POST['existencia']) || $_POST['existencia'] <=0) {
         $alert = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
@@ -18,14 +19,29 @@ if (!empty($_POST)) {
         $cantidad = $_POST['existencia'];
         $usuario_id = $_SESSION['idUser'];
 
-        
+        $foto = $_FILES['foto'];
+        $nombre_foto = $foto['name'];
+        $type = $foto['type'];
+        $url_temp = $foto['tmp_name'];
 
-        $query_insert = mysqli_query($conection, "INSERT INTO producto (proveedor, descripcion, precio, existencia, usuario_id) VALUE ('$proveedor', '$contacto', '$telefono', '$direccion', '$usuario_id')");
+        $imgProducto = 'img_producto.png';
+
+        if ($nombre_foto != '') {
+            $destino = 'img/uploads/';
+            $img_nombre = 'img_' . md5(date('d-m-Y H:m:s'));
+            $imgProducto = $img_nombre . '.jpg';
+            $src = $destino . $imgProducto;
+        }
+
+        $query_insert = mysqli_query($conection, "INSERT INTO producto (proveedor, descripcion, precio, existencia, usuario_id, foto) VALUE ('$proveedor', '$producto', '$precio', '$cantidad', '$usuario_id', '$imgProducto')");
 
         if ($query_insert) {
-            $alert = '<p class="msg_save">Proveedor creado correctamente.</p>';
+            if($nombre_foto != ''){
+                move_uploaded_file($url_temp, $src);
+            }
+            $alert = '<p class="msg_save">Producto creado correctamente.</p>';
         } else {
-            $alert = '<p class="msg_error">Error al guardar el Proveedor.</p>';
+            $alert = '<p class="msg_error">Error al guardar el Producto.</p>';
         }
     }
 }
@@ -54,7 +70,7 @@ if (!empty($_POST)) {
                 <label for="proveedor">Proveedor:</label>
 
                 <?php
-                $query_proveedor = mysqli_query($conection, "SELECT cod_producto, proveedor FROM proveedor WHERE estatus = 1 ORDER BY proveedor ASC");
+                $query_proveedor = mysqli_query($conection, "SELECT cod_proveedor, proveedor FROM proveedor WHERE estatus = 1 ORDER BY proveedor ASC");
                 $result_proveedor = mysqli_num_rows($query_proveedor);
                 mysqli_close($conection)
                 ?>
@@ -64,7 +80,7 @@ if (!empty($_POST)) {
                     if ($result_proveedor > 0) {
                         while ($proveedor = mysqli_fetch_array($query_proveedor)) {
                     ?>
-                            <option value="<?php echo $proveedor['cod_producto']; ?>"><?php echo $proveedor['proveedor']; ?></option>
+                            <option value="<?php echo $proveedor['cod_proveedor']; ?>"><?php echo $proveedor['proveedor']; ?></option>
                     <?php
                         }
                     }
@@ -72,10 +88,13 @@ if (!empty($_POST)) {
                 </select>
                 <label for="descripcion">Producto:</label>
                 <input type="text" name="descripcion" id="descripcion" placeholder="Nombre del producto">
+
                 <label for="precio">Precio:</label>
                 <input type="number" name="precio" id="precio" placeholder="Precio del producto">
+
                 <label for="existencia">Cantidad:</label>
                 <input type="number" name="existencia" id="existencia" placeholder="Cantidad del producto">
+
                 <div class="photo">
                     <label for="foto">Foto</label>
                     <div class="prevPhoto">

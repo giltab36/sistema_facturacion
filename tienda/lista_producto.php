@@ -19,8 +19,8 @@ include "../conexion.php";
     <section id="container">
 
 
-        <h1 class="title"><i class="fa-solid fa-users"></i> Listado de Productos</h1>
-        <a href="registro_producto.php" class="btn_new"><i class="fa-solid fa-user-plus"></i> Agregar Producto</a>
+        <h1 class="title"><i class="fa-solid fa-boxes-stacked"></i> Listado de Productos</h1>
+        <a href="registro_producto.php" class="btn_new"><i class="fa-solid fa-truck-ramp-box"></i> Agregar Producto</a>
 
         <form action="buscar_cliente.php" method="GET" class="form_search">
             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
@@ -39,7 +39,7 @@ include "../conexion.php";
             </tr>
             <?php
             //Paginador
-            $sql_register = mysqli_query($conection, "SELECT COUNT(*) AS total_registro FROM producto WHERE astatus = 1");
+            $sql_register = mysqli_query($conection, "SELECT COUNT(*) AS total_registro FROM producto WHERE estatus = 1");
             $result_register = mysqli_fetch_array($sql_register);
             $total_registro = $result_register['total_registro'];
 
@@ -54,7 +54,7 @@ include "../conexion.php";
             $desde = ($pagina - 1) * $por_pagina;
             $total_paginas = ceil($total_registro / $por_pagina);
 
-            $query = mysqli_query($conection, "SELECT cod_producto, descripcion, precio, existencia, foto, pto.proveedor, pdor.proveedor FROM producto pto INNER JOIN proveedor pdor ON pto.proveedor = pdor.cod_proveedor WHERE astatus = 1 ORDER BY cod_producto ASC LIMIT $desde, $por_pagina");
+            $query = mysqli_query($conection, "SELECT cod_producto, descripcion, precio, existencia, foto, pto.proveedor, pdor.proveedor FROM producto pto INNER JOIN proveedor pdor ON pto.proveedor = pdor.cod_proveedor WHERE pto.estatus = 1 ORDER BY cod_producto ASC LIMIT $desde, $por_pagina");
             mysqli_close($conection);
             $result = mysqli_num_rows($query);
 
@@ -71,7 +71,7 @@ include "../conexion.php";
                         <td><?php echo $data['foto'] ?></td>
                         <td>
                             <a href="editar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i>Editar</a>
-                            <?php if ($_SESSION['rol'] == 1 /*|| $_SESSION['rol'] == 2*/) { ?>
+                            <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
                                 |
                                 <a href="eliminar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_delete"><i class="fa-regular fa-trash-can"></i> Eliminar</a>
                             <?php } ?>
