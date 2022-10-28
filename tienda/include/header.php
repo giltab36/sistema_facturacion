@@ -20,3 +20,22 @@ if (empty($_SESSION['active'])) {
     </div>
     <?php include "nav.php"; ?>
 </header>
+
+<div class="modal">
+    <div class="bodyModal"></div>
+    <form action="" method="post" name="form_add_product" id="form_add_product">
+
+        <h1><i class="fas fa-cubes" style="font-size: 45pt;"></i> <br> Agregar Producto</h1>
+        <h2 class="nameProducto"> Monitor LCD 42"</h2><br>
+        <input type="number" name="cantidad" id="txtCantidad" placeholder="Cantidad del producto" required><br>
+        <input type="text" name="precio" id="txtPrecio" placeholder="Precio del producto" required><br>
+        <input type="hidden" name="producto_id" id="producto_id" required>
+        <input type="hidden" name="action" id="addProduct" required>
+        <div class="alert alertAddProduct">
+            <p>Alerta de accion</p>
+        </div>
+        <button type="submit" class="btn_nw"><i class="fas fa-plus"></i> Agregar</button>
+        <a href="#" class="btn_ok closeModal"><i class="fas fa-ban"></i> Cerrar</a>
+        
+    </form>
+</div>

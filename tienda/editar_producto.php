@@ -33,7 +33,7 @@ if (!empty($_POST)) {
 
 //Mostrar Datos
 if (empty($_REQUEST['id'])) {
-    header('Location: lista_proveedor.php');
+    header('Location: lista_producto.php');
     mysqli_close($conection);
 }
 

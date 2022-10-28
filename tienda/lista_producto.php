@@ -55,8 +55,8 @@ include "../conexion.php";
             $total_paginas = ceil($total_registro / $por_pagina);
 
             $query = mysqli_query($conection, "SELECT cod_producto, descripcion, precio, existencia, foto, pto.proveedor, pdor.proveedor FROM producto pto INNER JOIN proveedor pdor ON pto.proveedor = pdor.cod_proveedor WHERE pto.estatus = 1 ORDER BY cod_producto DESC LIMIT $desde, $por_pagina");
-            mysqli_close($conection);
             $result = mysqli_num_rows($query);
+            mysqli_close($conection);
 
             if ($result > 0) {
                 $index = 1;
@@ -77,7 +77,7 @@ include "../conexion.php";
 
                         <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
                             <td>
-                                <a href="#" product="<?php echo $data['cod_producto'] ?>" class="link_add add_product"><i class="fa-solid fa-plus"></i> Agregar</a>
+                                <a product="<?php echo $data['cod_producto'] ?>" class="link_add add_product" href="#"><i class="fa-solid fa-plus"></i> Agregar</a>
                                 |
                                 <a href="editar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i> Editar</a>
                                 |

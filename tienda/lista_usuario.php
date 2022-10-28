@@ -16,7 +16,7 @@ include "../conexion.php";
     <title>Lista de Usuarios</title>
 </head>
 
-<body style="background: url('./img/fondo.jpg') no-repeat; background-size: cover; background-position: center;">
+<body>
     <?php include "include/header.php"; ?>
     <section id="container">
 
