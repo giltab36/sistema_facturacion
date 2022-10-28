@@ -58,7 +58,6 @@ if (empty($_REQUEST['id'])) {
     <section id="container">
         <div class="data_delete">
             <i class="fa-solid fa-truck-field fa-7x" style="color: silver;"></i>
-            <!--<i class="fa-solid fa-user-xmark fa-7x" style="color: silver;"></i>-->
             <br>
             <br>
             <h2><b>¿Seguro que desea eliminar estos datos?</b></h2>

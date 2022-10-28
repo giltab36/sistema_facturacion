@@ -54,13 +54,18 @@ include "../conexion.php";
             $desde = ($pagina - 1) * $por_pagina;
             $total_paginas = ceil($total_registro / $por_pagina);
 
-            $query = mysqli_query($conection, "SELECT cod_producto, descripcion, precio, existencia, foto, pto.proveedor, pdor.proveedor FROM producto pto INNER JOIN proveedor pdor ON pto.proveedor = pdor.cod_proveedor WHERE pto.estatus = 1 ORDER BY cod_producto ASC LIMIT $desde, $por_pagina");
+            $query = mysqli_query($conection, "SELECT cod_producto, descripcion, precio, existencia, foto, pto.proveedor, pdor.proveedor FROM producto pto INNER JOIN proveedor pdor ON pto.proveedor = pdor.cod_proveedor WHERE pto.estatus = 1 ORDER BY cod_producto DESC LIMIT $desde, $por_pagina");
             mysqli_close($conection);
             $result = mysqli_num_rows($query);
 
             if ($result > 0) {
                 $index = 1;
                 while ($data = mysqli_fetch_array($query)) {
+                    if ($data['foto'] != 'img_producto.png') {
+                        $foto = 'img/uploads/' . $data['foto'];
+                    } else {
+                        $foto = 'img/' . $data['foto'];
+                    }
             ?>
                     <tr>
                         <td><?php echo $index++ ?></td>
@@ -68,14 +73,17 @@ include "../conexion.php";
                         <td><?php echo $data['descripcion'] ?></td>
                         <td><?php echo $data['precio'] ?></td>
                         <td><?php echo $data['existencia'] ?></td>
-                        <td><?php echo $data['foto'] ?></td>
-                        <td>
-                            <a href="editar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i>Editar</a>
-                            <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
+                        <td class="img_producto"><img src="<?php echo $foto ?>" alt="<?php echo $data['descripcion'] ?>"></td>
+
+                        <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
+                            <td>
+                                <a href="agregar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_add"><i class="fa-solid fa-plus"></i> Agregar</a>
+                                |
+                                <a href="editar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i> Editar</a>
                                 |
                                 <a href="eliminar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_delete"><i class="fa-regular fa-trash-can"></i> Eliminar</a>
-                            <?php } ?>
-                        </td>
+                            </td>
+                        <?php } ?>
                     </tr>
             <?php
                 }

@@ -365,7 +365,7 @@ table td {
 .link_edit {
     color: white;
     text-decoration: none;
-    background: green;
+    background: rgb(52, 52, 139);
     border-radius: 3px;
     padding: 5px;
 }
@@ -374,6 +374,14 @@ table td {
     color: white;
     text-decoration: none;
     background: red;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.link_add {
+    color: white;
+    text-decoration: none;
+    background: rgb(114, 161, 18);
     border-radius: 3px;
     padding: 5px;
 }
@@ -548,8 +556,16 @@ table td {
     z-index: 10;
 }
 
-#tbl_list_productos img {
+/*#tbl_list_productos img {
     width: 50px;
+}*/
+
+
+/*----- Listado Producto -----*/
+.img_producto img {
+    width: 70px;
+    height: auto;
+    margin: auto;
 }
 
 .imgProductoDelete {
