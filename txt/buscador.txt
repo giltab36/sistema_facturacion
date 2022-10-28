@@ -1,0 +1,13 @@
+<!------------ Buscador ------------>
+    <form action="buscar_cliente.php" method="POST" class="form_search">
+        <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
+        <input type="submit" value="Buscar" class="btn_search">
+    </form>
+
+<!------------ Buscador ------------>
+    <?php
+    $busqueda = strtolower($_REQUEST['busqueda']);
+    if (empty($busqueda)) {
+        header("location: listar_cliente.php");
+    }
+    ?>

@@ -1,0 +1,32 @@
+<!============= Paginador =============>
+
+<?php
+    include 'db.php';
+    $conexiondb = conectardb();
+
+    //Paginación
+    $sql_registe = mysqli_query($conexiondb, "SELECT COUNT(*) AS total_registro FROM cliente");
+    $result_register = mysqli_fetch_array($sql_registe);
+    $total_registro = $result_register['total_registro'];
+    $por_pagina = 5;
+
+    if (empty($_GET['pagina'])) {
+        $pagina = 1;
+    } else {
+        $pagina = $_GET['pagina'];
+    }
+    $desde = ($pagina - 1) * $por_pagina;
+    $total_paginas = ceil($total_registro / $por_pagina);
+
+    //Base de datos    
+    $query = "SELECT * FROM cliente ORDER BY cliente_id ASC LIMIT $desde, $por_pagina";
+    $resultado = mysqli_query($conexiondb, $query);
+    mysqli_close($conexiondb);
+
+
+//para el archivo de paginador
+//Base de datos
+    $query = "SELECT * FROM cliente WHERE (cedula_c LIKE '%$busqueda%' OR nombre_c LIKE '%$busqueda%' OR apellido_c LIKE '%$busqueda%' OR telefono_c LIKE '%$busqueda%') ORDER BY nombre_c ASC LIMIT $desde, $por_pagina";
+    $resultado = mysqli_query($conexiondb, $query);
+    mysqli_close($conexiondb);
+    ?>

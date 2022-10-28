@@ -77,7 +77,7 @@ include "../conexion.php";
 
                         <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
                             <td>
-                                <a href="agregar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_add"><i class="fa-solid fa-plus"></i> Agregar</a>
+                                <a href="#" product="<?php echo $data['cod_producto'] ?>" class="link_add add_product"><i class="fa-solid fa-plus"></i> Agregar</a>
                                 |
                                 <a href="editar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i> Editar</a>
                                 |
