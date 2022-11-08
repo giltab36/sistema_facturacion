@@ -575,7 +575,7 @@ table td {
 .modal {
     position: fixed;
     width: 100%;
-    height: 100vh;
+    height: 100vw;
     background: rgb(0, 0, 0, 0.81);
     display: block;
 }
@@ -589,4 +589,19 @@ table td {
     justify-content: center;
     align-items: center;
     background-color: #FFF;
+}
+
+.modal h1 {
+    color: #42b343;
+    text-transform: uppercase;
+}
+
+.modal h2 {
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+#form_add_product {
+    width: 420px;
+    text-align: center;
 }

@@ -39,9 +39,13 @@ $(document).ready(function () {
     });
 
     //Modal Form Add Product
-    $('.add_product').click(function (e) {
-        e.preventDefault();
+    $('.add_product').click(function (event) {
+        event.preventDefault()
         var producto = $(this).attr('product');
-        alert(producto);
+        $('.modal').fadeIn();
     });
 });
+
+function closeModal() {
+    $('.modal').fadeOut();
+}
