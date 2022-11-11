@@ -71,6 +71,30 @@ $(document).ready(function () {
     });
 });
 
+function sendDataProduct() {
+
+    $('.alertAddProduct').html('');
+
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        async: true,
+        data: $('#from_add_product').serialize(),
+
+        success: function (response) {
+            console.log(response);
+        },
+
+        error: function (error) {
+            console.log(error);
+        }
+
+    });
+}
+
 function closeModal() {
+    $('.alertAddProduct').html('');
+    $('#txtCantidad').val('');
+    $('#txtPrecio').val('');
     $('.modal').fadeOut();
 }
