@@ -28,8 +28,8 @@ if (empty($_SESSION['active'])) {
             <h2 class="nameProducto"></h2><br>
             <input type="number" name="cantidad" id="txtCantidad" placeholder="Cantidad del producto" required><br>
             <input type="text" name="precio" id="txtPrecio" placeholder="Precio del producto" required>
-            <input type="hidden" name="producto_id" id="producto_id" required>
-            <input type="hidden" name="action" id="addProduct" required>
+            <input type="hidden" name="producto_id" id="producto_id" required readonly>
+            <input type="hidden" name="addProduct" id="addProduct" required readonly>
             <div class="alert alertAddProduct">
                 <p></p>
             </div>

@@ -40,7 +40,7 @@ $(document).ready(function () {
 
     //Modal Form Add Product
     $('.add_product').click(function (event) {
-        event.preventDefault()
+        event.preventDefault();
         var producto = $(this).attr('product');
         var action = 'infoProducto';
 
@@ -56,6 +56,7 @@ $(document).ready(function () {
                 if (response != 'error') {
 
                     var info = JSON.parse(response);
+                    console.log(info);
                     $('#producto_id').val(info.cod_producto);
                     $('.nameProducto').html(info.descripcion);
                 }
