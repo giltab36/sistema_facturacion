@@ -56,7 +56,6 @@ $(document).ready(function () {
                 if (response != 'error') {
 
                     var info = JSON.parse(response);
-                    console.log(info);
                     $('#producto_id').val(info.cod_producto);
                     $('.nameProducto').html(info.descripcion);
                 }
