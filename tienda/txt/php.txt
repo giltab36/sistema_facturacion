@@ -1,1 +1,3 @@
 <?php echo $data['cod_producto'] ?>
+
+<a href="eliminar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_delete"><i class="fa-regular fa-trash-can"></i> Eliminar</a>

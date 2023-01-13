@@ -38,7 +38,8 @@ if (!empty($_POST)) {
                 $result_pro = mysqli_num_rows($query_upd);
                 if ($result_pro > 0) {
                     $data = mysqli_fetch_assoc($query_upd);
-                    echo json_encode($data, JSON_UNESCAPED_UNICODE);
+                    $data['producto_id'] = $producto_id;
+                    echo json_encode($data,JSON_UNESCAPED_UNICODE);
                     exit;
                 }
             } else {
@@ -48,6 +49,26 @@ if (!empty($_POST)) {
         } else {
             echo 'error';
         }
+        exit;
+    }
+
+    //Eliminar producto
+    if ($_POST['action'] == 'delProducto') {
+
+        if (empty($_POST['producto_id']) || !is_numeric($_POST['producto_id'])) {
+            echo 'error';
+        } else {
+            $producto_id = $_POST['producto_id'];
+            $query_delete = mysqli_query($conection, "UPDATE producto SET estatus = 0 WHERE cod_producto = $idproducto");
+            mysqli_close($conection);
+
+            if ($query_delete) {
+                echo 'ok';
+            } else {
+                echo 'Error';
+            }
+        }
+        echo 'Error';
         exit;
     }
 }

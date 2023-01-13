@@ -29,13 +29,13 @@ include "../conexion.php";
 
         <table>
             <tr>
-                <th scope=""><b>Nº</b></th>
-                <th scope=""><b>Proveedor</b></th>
-                <th scope=""><b>Producto</b></th>
-                <th scope=""><b>Precio</b></th>
-                <th scope=""><b>Cantidad</b></th>
-                <th scope=""><b>Foto</b></th>
-                <th scope=""><b>Opciones</b></th>
+                <th><b>Nº</b></th>
+                <th><b>Proveedor</b></th>
+                <th><b>Producto</b></th>
+                <th><b>Precio</b></th>
+                <th><b>Cantidad</b></th>
+                <th><b>Foto</b></th>
+                <th><b>Opciones</b></th>
             </tr>
             <?php
             //Paginador
@@ -67,21 +67,21 @@ include "../conexion.php";
                         $foto = 'img/' . $data['foto'];
                     }
             ?>
-                    <tr>
+                    <tr class="row<?php echo $data['cod_producto'];?>">
                         <td><?php echo $index++ ?></td>
                         <td><?php echo $data['proveedor'] ?></td>
                         <td><?php echo $data['descripcion'] ?></td>
-                        <td><?php echo $data['precio'] ?></td>
-                        <td><?php echo $data['existencia'] ?></td>
+                        <td class="celPrecio"><?php echo $data['precio'] ?></td>
+                        <td class="celExistencia"><?php echo $data['existencia'] ?></td>
                         <td class="img_producto"><img src="<?php echo $foto ?>" alt="<?php echo $data['descripcion'] ?>"></td>
 
                         <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
                             <td>
-                                <a product="<?php echo $data['cod_producto']; ?>" class="link_add add_product" href="#"><i class="fa-solid fa-plus"></i> Agregar</a>
+                                <a href="#" product="<?php echo $data['cod_producto']; ?>" class="link_add add_product" ><i class="fa-solid fa-plus"></i> Agregar</a>
                                 |
                                 <a href="editar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i> Editar</a>
                                 |
-                                <a href="eliminar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_delete"><i class="fa-regular fa-trash-can"></i> Eliminar</a>
+                                <a href="#" product="<?php echo $data['cod_producto']; ?>" class="link_delete del_product"><i class="fa-regular fa-trash-can"></i> Eliminar</a>
                             </td>
                         <?php } ?>
                     </tr>
