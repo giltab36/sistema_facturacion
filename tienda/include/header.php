@@ -23,6 +23,6 @@ if (empty($_SESSION['active'])) {
 
 <div class="modal">
     <div class="bodyModal">
-        
+    
     </div>
 </div>

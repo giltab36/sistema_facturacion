@@ -22,12 +22,12 @@ if (!empty($_POST)) {
     }
 
     //Agregar producto a entrada
-    if ($_POST['action'] == 'addProduct') {
+    if ($_POST['action'] == 'addPorduct') {
 
         if (!empty($_POST['cantidad']) || !empty($_POST['precio']) || !empty($_POST['producto_id'])) {
             $cantidad = $_POST['cantidad'];
             $precio = $_POST['precio'];
-            $producto_id = $_POST['cod_producto'];
+            $producto_id = $_POST['producto_id'];
             $usuario_id = $_SESSION['idUser'];
 
             $query_insert = mysqli_query($conection, "INSERT INTO entradas (cod_producto, cantidad, precio, usuario_id) VALUE ($producto_id, $cantidad, $precio, $usuario_id)");
@@ -39,7 +39,7 @@ if (!empty($_POST)) {
                 if ($result_pro > 0) {
                     $data = mysqli_fetch_assoc($query_upd);
                     $data['producto_id'] = $producto_id;
-                    echo json_encode($data,JSON_UNESCAPED_UNICODE);
+                    echo json_encode($data, JSON_UNESCAPED_UNICODE);
                     exit;
                 }
             } else {
