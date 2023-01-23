@@ -102,12 +102,12 @@ $(document).ready(function () {
 
                     $('.bodyModal').html('<form action="" method="post" name="form_del_product" id="form_del_product" onsubmit="event.preventDefault(); delProduct();">' +
                         '<h1><i class="fas fa-cubes" style="font-size: 45pt;"></i> <br> Eliminar <br> Producto</h1>' +
-                        '<p><b>¿Seguro que desea eliminar este producto?</b></p>' +
+                        '<p><b>¿Seguro que desea eliminar el siguiente articulo?</b></p>' +
                         '<h2 class="nameProducto">' + info.descripcion + '</h2><br>' +
                         '<input type="hidden" name="producto_id" id="producto_id" value="' + info.cod_producto + '" required readonly>' +
-                        '<input type="hidden" name="action" value="delPorduct" readonly>' +
+                        '<input type="hidden" name="action" value="delProduct" readonly>' +
                         '<div class="alert alertAddProduct"></div>' +
-                        '<a href="#" class="btn_cancel" onclick="closeModal()";> Cancelar</a>' +
+                        '<a href="#" class="btn_cancel" onclick="closeModal()";> Cerrar</a>' +
                         '<button type="submit" class="btn_ok"> Eliminar</button>' +
                         '</form>');
                 }
@@ -122,8 +122,30 @@ $(document).ready(function () {
         $('.modal').fadeIn();
     });
 
+    $('#search_proveedor').change(function (e) {
+        e.preventDefault();
 
-});
+        var sistema = getUrl();
+        location.href = sistema + 'buscar_producto.php?proveedor=' + $(this).val();
+    })
+
+    //Activar campo para registro de clientes en ventas
+    $('.btn_new_cliente').click(function (e) {
+        e.preventDefault();
+        $('#nom_cliente').removeAttr('disabled');
+        $('#tel_cliente').removeAttr('disabled');
+        $('#dir_cliente').removeAttr('disabled');
+
+        $('#div_registro_cliente').slideDown();
+    });
+
+}); //End Ready
+
+function getUrl() {
+    var loc = window.location;
+    var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+    return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+}
 
 //Agregar Productos
 function sendDataProduct() {
@@ -137,6 +159,7 @@ function sendDataProduct() {
         data: $('#form_add_product').serialize(),
 
         success: function (response) {
+            console.log(response);
             if (response == 'error') {
                 $('.alertAddProduct').html('<p style="color: red;">Error al agregar el producto.</p>');
             } else {
@@ -159,6 +182,7 @@ function sendDataProduct() {
 //Eliminar Producto
 function delProduct() {
 
+    var pr = $('#producto_id').val();
     $('.alertAddProduct').html('');
 
     $.ajax({
@@ -168,15 +192,12 @@ function delProduct() {
         data: $('#form_del_product').serialize(),
 
         success: function (response) {
-
+            console.log(response);
             if (response == 'error') {
                 $('.alertAddProduct').html('<p style="color: red;">Error al eliminar el producto.</p>');
             } else {
-                var info = JSON.parse(response);
-                $('.row' + info.producto_id + '.celPrecio').html(info.nuevo_precio);
-                $('.row' + info.producto_id + '.celExistencia').html(info.nuevo_existencia);
-                $('#txtCantidad').val('');
-                $('#txtPrecio').val('');
+                $('.row' + pr).remove();
+                $('#form_del_product .btn_ok').remove();
                 $('.alertAddProduct').html('<p>Producto eliminado correctamente</p>');
             }
         },

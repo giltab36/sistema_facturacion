@@ -38,7 +38,7 @@
         <li class="principal">
             <a href=""><i class="fa-solid fa-dollar-sign"></i> Ventas</a>
             <ul>
-                <li><a href="registro_venta.php"><i class="fa-solid fa-cart-plus"></i> Nuevo Venta</a></li>
+                <li><a href="registro_venta.php"><i class="fa-solid fa-cart-plus"></i> Nueva Venta</a></li>
                 <li><a href="lista_venta.php"><i class="fa-solid fa-list-check"></i> Ventas</a></li>
             </ul>
         </li>

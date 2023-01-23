@@ -124,7 +124,7 @@ include "../conexion.php";
                     if ($pagina != $total_paginas) {
                     ?>
                         <li><a href="?pagina=<?php echo $pagina + 1; ?>"><i class="fa-solid fa-forward"></i></a></li>
-                        <li><a hrefa="?pagina=<?php echo $total_paginas; ?>"><i class="fa-solid fa-forward-step"></i></a></li>
+                        <li><a href="?pagina=<?php echo $total_paginas; ?>"><i class="fa-solid fa-forward-step"></i></a></li>
                     <?php } ?>
                 </ul>
             </div>
