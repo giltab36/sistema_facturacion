@@ -1,3 +1,5 @@
+//	Agregar producto a existencia
+
 DELIMITER $$
 	CREATE PROCEDURE actualizar_precio_producto (n_cantidad int, n_precio decimal(10,2), codigo int)
 	BEGIN
@@ -22,3 +24,5 @@ DELIMITER $$
         
 	END;$$
 DELIMITER ;
+
+//===============================================================================//

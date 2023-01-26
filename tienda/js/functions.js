@@ -49,7 +49,7 @@ $(document).ready(function () {
 
         $.ajax({
             url: 'ajax.php',
-            type: 'POST',
+            type: "POST",
             async: true,
             data: { action: action, producto: producto },
 
@@ -73,19 +73,16 @@ $(document).ready(function () {
                         '</form>');
                 }
             },
-
             error: function (error) {
-
             }
-
         });
-
         $('.modal').fadeIn();
     });
 
     //  Modal Form Delete Product
     $('.del_product').click(function (event) {
         event.preventDefault();
+
         var producto = $(this).attr('product');
         var action = 'infoProducto';
 
@@ -112,13 +109,9 @@ $(document).ready(function () {
                         '</form>');
                 }
             },
-
             error: function (error) {
-
             }
-
         });
-
         $('.modal').fadeIn();
     });
 
@@ -198,8 +191,9 @@ $(document).ready(function () {
 
             success: function (response) {
 
-                //  Agregar id a input hidden
-                if (response != 'error') {
+                console.log(response);
+                /*if (response != 'error') {
+                    //  Agregar id a input hidden
                     $('#idcliente').val(response);
                     //  Bloquear campos
                     $('#nom_cliente').attr('disabled', 'disabled');
@@ -211,11 +205,76 @@ $(document).ready(function () {
 
                     //  Ocultar boton guardar
                     $('#div_registro_cliente').slideUp();
-                }
+                }*/
             },
             error: function (error) {
-            },
+            }
         });
+    });
+
+    //  Buscar producto
+    $('#txt_cod_barra').keyup(function (e) {
+        e.preventDefault();
+
+        var producto = $(this).val();
+        var action = 'infoProducto';
+
+        if (producto != '') {
+            $.ajax({
+                url: 'ajax.php',
+                type: "POST",
+                async: true,
+                data: { action: action, producto: producto },
+
+                success: function (response) {
+                    if (response != 'error') {
+                        var info = JSON.parse(response);
+
+                        $('#txt_descripcion').html(info.descripcion);
+                        $('#txt_existencia').html(info.existencia);
+                        $('#txt_cant_producto').val('1');
+                        $('#txt_precio').html(info.precio);
+                        $('#txt_precio_total').html(info.precio);
+
+                        //  Activar Cantidad
+                        $('#txt_cant_producto').removeAttr('disabled');
+
+                        //  Mostrar boton agregar
+                        $('#add_product_venta').slideDown();
+                    } else {
+
+                        $('#txt_descripcion').html('-');
+                        $('#txt_existencia').html('-');
+                        $('#txt_cant_producto').val('0');
+                        $('#txt_precio').html('0.00');
+                        $('#txt_precio_total').html('0.00');
+
+                        //  Bloquear Cantidad
+                        $('#txt_cant_producto').attr('disabled', 'disbled');
+
+                        //  Ocultar boton agregar
+                        $('#add_product_venta').slideUp();
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        }
+    });
+
+    //  Validar la cantidad del producto antes de agregar
+    $('#txt_cant_producto').keyup(function (e) {
+        e.preventDefault();
+
+        var precio_total = $(this).val() * $('#txt_precio').html();
+        $('#txt_precio_total').html(precio_total);
+
+        //Ocultar el boton agregar si la cantidad es menor que 1
+        if ($(this).val() < 1 || isNaN($(this).val())) {
+            $('#add_product_venta').slideUp();
+        } else {
+            $('#add_product_venta').slideDown();
+        }
     });
 
 }); //  End Ready

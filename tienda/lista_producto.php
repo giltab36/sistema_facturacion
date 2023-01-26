@@ -20,8 +20,10 @@ include "../conexion.php";
 
 
         <h1 class="title"><i class="fa-solid fa-boxes-stacked"></i> Listado de Productos</h1>
-        <a href="registro_producto.php" class="btn_new"><i class="fa-solid fa-truck-ramp-box"></i> Agregar Producto</a>
-
+        <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
+            <a href="registro_producto.php" class="btn_new"><i class="fa-solid fa-truck-ramp-box"></i> Agregar Producto</a>
+        <?php } ?>
+        
         <form action="buscar_producto.php" method="GET" class="form_search">
             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
             <button type="submit" class="btn_search"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -41,17 +43,17 @@ include "../conexion.php";
                         ?>
 
                         <select name="proveedor" id="search_proveedor"><b>
-                            <option class="sub" value="" selected><b>Proveedores</b></option>
-                            <?php
-                            if ($result_proveedor > 0) {
-                                while ($proveedor = mysqli_fetch_array($query_proveedor)) {
-                            ?>
-                                    <option value="<?php echo $proveedor['cod_proveedor']; ?>"><?php echo $proveedor['proveedor']; ?></option>
-                            <?php
+                                <option class="sub" value="" selected><b>Proveedores</b></option>
+                                <?php
+                                if ($result_proveedor > 0) {
+                                    while ($proveedor = mysqli_fetch_array($query_proveedor)) {
+                                ?>
+                                        <option value="<?php echo $proveedor['cod_proveedor']; ?>"><?php echo $proveedor['proveedor']; ?></option>
+                                <?php
+                                    }
                                 }
-                            }
-                            ?>
-                        </b></select>
+                                ?>
+                            </b></select>
                     </b></th>
                 <th><b>Foto</b></th>
                 <th><b>Opciones</b></th>
@@ -109,7 +111,6 @@ include "../conexion.php";
             <?php
                 }
             }
-
             ?>
         </table>
 

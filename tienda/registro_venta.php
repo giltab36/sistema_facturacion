@@ -28,7 +28,7 @@ include "../conexion.php";
                 <h4><b>Datos del Cliente</b></h4>
                 <a href="#" class="btn_new btn_new_cliente"><i class="fas fa-plus"></i> Nuevo Cliente</a>
             </div>
-            <forn name="form_new_cliente_venta" id="form_new_cliente_venta" class="datos">
+            <forn method="POST" name="form_new_cliente_venta" id="form_new_cliente_venta" class="datos">
                 <input type="hidden" name="action" value="addCliente" readonly>
                 <input type="hidden" id="idcliente" name="idcliente" value="" required readonly>
                 <div class="wd30">
@@ -84,10 +84,10 @@ include "../conexion.php";
                     <th>Accion</th>
                 </tr>
                 <tr>
-                    <td><input type="text" name="txt_cod_producto" id="txt_cod_producto"></td>
+                    <td><input type="text" name="txt_cod_barra" id="txt_cod_barra"></td>
                     <td id="txt_descripcion">-</td>
                     <td id="txt_existencia">-</td>
-                    <td><input type="text" name="txt_cod_producto" id="txt_cod_producto" value="0" min="1" disabled></td>
+                    <td><input type="text" name="txt_cant_producto" id="txt_cant_producto" value="0" min="1" disabled></td>
                     <td id="txt_precio" class="textright">0.00</td>
                     <td id="txt_precio_total" class="textright">0.00</td>
                     <td><a href="#" id="add_product_venta" class="link_add"><i class="fas fa-plus"></i> Agregar</a></td>
