@@ -1,0 +1,29 @@
+<?php
+session_start();
+
+include 'db.php';
+
+$conexion = conectardb();
+$user = mysqli_real_escape_string($conexion, $_POST['usuario']);
+$pass = md5(mysqli_real_escape_string($conexion, $_POST['clave']));
+
+$consulta = "SELECT * FROM usuarios WHERE usuario = '$user' AND clave = '$pass'";
+$result = mysqli_query($conexion, $consulta);
+
+$filas = mysqli_num_rows($result);
+
+if ($filas){
+    $_SESSION['active'] = true;
+    $_SESSION['user'] = $data['usuario'];
+    $_SESSION['perfil'] = $data['perfil'];
+    header ("location: inicio.php");
+} else {
+    include 'index.php';
+    $alert = "ingrese su nombre de usuario y su clave";
+    session_destroy();
+
+}
+
+mysqli_free_result($result);
+mysqli_close($conexion);
+?>

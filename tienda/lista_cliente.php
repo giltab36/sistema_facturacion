@@ -60,14 +60,14 @@ include "../conexion.php";
                 $index = 1;
                 while ($data = mysqli_fetch_array($query)) {
                     if ($data["cedula"] == 0) {
-                        $nit = 'C/F';
+                        $ruc = 'C/F';
                     } else {
-                        $nit = $data["cedula"];
+                        $ruc = $data["cedula"];
                     }
             ?>
                     <tr>
                         <td><?php echo $index++ ?></td>
-                        <td><?php echo $nit; ?></td>
+                        <td><?php echo $ruc; ?></td>
                         <td><?php echo $data['nombre'] ?></td>
                         <td><?php echo $data['telefono'] ?></td>
                         <td><?php echo $data['direccion'] ?></td>

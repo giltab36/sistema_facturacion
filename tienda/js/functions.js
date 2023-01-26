@@ -41,7 +41,7 @@ $(document).ready(function () {
         }
     });
 
-    //Modal Form Add Product
+    //  Modal Form Add Product
     $('.add_product').click(function (event) {
         event.preventDefault();
         var producto = $(this).attr('product');
@@ -75,7 +75,7 @@ $(document).ready(function () {
             },
 
             error: function (error) {
-                console.log(error);
+
             }
 
         });
@@ -83,7 +83,7 @@ $(document).ready(function () {
         $('.modal').fadeIn();
     });
 
-    //Modal Form Delete Product
+    //  Modal Form Delete Product
     $('.del_product').click(function (event) {
         event.preventDefault();
         var producto = $(this).attr('product');
@@ -91,7 +91,7 @@ $(document).ready(function () {
 
         $.ajax({
             url: 'ajax.php',
-            type: 'POST',
+            type: "POST",
             async: true,
             data: { action: action, producto: producto },
 
@@ -114,7 +114,7 @@ $(document).ready(function () {
             },
 
             error: function (error) {
-                console.log(error);
+
             }
 
         });
@@ -122,6 +122,7 @@ $(document).ready(function () {
         $('.modal').fadeIn();
     });
 
+    //  Buscador de proveedor o producto
     $('#search_proveedor').change(function (e) {
         e.preventDefault();
 
@@ -129,7 +130,7 @@ $(document).ready(function () {
         location.href = sistema + 'buscar_producto.php?proveedor=' + $(this).val();
     })
 
-    //Activar campo para registro de clientes en ventas
+    //  Activar campo para registro de clientes en ventas
     $('.btn_new_cliente').click(function (e) {
         e.preventDefault();
         $('#nom_cliente').removeAttr('disabled');
@@ -139,27 +140,106 @@ $(document).ready(function () {
         $('#div_registro_cliente').slideDown();
     });
 
-}); //End Ready
+    //Buscar Cliente
+    $('#ruc_cliente').keyup(function (e) {
+        e.preventDefault();
 
+        var cl = $(this).val();
+        var action = 'searchCliente';
+
+        $.ajax({
+            url: 'ajax.php',
+            type: "POST",
+            async: true,
+            data: { action: action, cliente: cl },
+
+            success: function (response) {
+                if (response == 0) {
+                    $('#idcliente').val('');
+                    $('#nom_cliente').val('');
+                    $('#tel_cliente').val('');
+                    $('#dir_cliente').val('');
+
+                    //  Mostrar boton agregar
+                    $('.btn_new_cliente').slideDown();
+                } else {
+                    var data = $.parseJSON(response);
+                    $('#idcliente').val(data.idcliente);
+                    $('#nom_cliente').val(data.nombre);
+                    $('#tel_cliente').val(data.telefono);
+                    $('#dir_cliente').val(data.direccion);
+
+                    //  Ocultar boton agregar
+                    $('.btn_new_cliente').slideUp();
+
+                    // Bloquear campos
+                    $('#nom_cliente').attr('disabled', 'disabled');
+                    $('#tel_cliente').attr('disabled', 'disabled');
+                    $('#dir_cliente').attr('disabled', 'disabled');
+
+                    //  Ocultar boton guardar
+                    $('#div_registro_cliente').slideUp();
+                };
+            },
+            error: function (error) {
+            },
+        });
+    });
+
+    //  Crear Cliente - Venta
+    $('#form_new_cliente_venta').submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: 'ajax.php',
+            type: "POST",
+            async: true,
+            data: $('#form_new_cliente_venta').serialize(),
+
+            success: function (response) {
+
+                //  Agregar id a input hidden
+                if (response != 'error') {
+                    $('#idcliente').val(response);
+                    //  Bloquear campos
+                    $('#nom_cliente').attr('disabled', 'disabled');
+                    $('#tel_cliente').attr('disabled', 'disabled');
+                    $('#dir_cliente').attr('disabled', 'disabled');
+
+                    //  Ocultar boton agregar
+                    $('.btn_new_cliente').slideUp();
+
+                    //  Ocultar boton guardar
+                    $('#div_registro_cliente').slideUp();
+                }
+            },
+            error: function (error) {
+            },
+        });
+    });
+
+}); //  End Ready
+
+//  Buscador de proveedor o producto
 function getUrl() {
     var loc = window.location;
     var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
     return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
 }
 
-//Agregar Productos
+//  Agregar Productos
 function sendDataProduct() {
 
     $('.alertAddProduct').html('');
 
     $.ajax({
         url: 'ajax.php',
-        type: 'POST',
+        type: "POST",
         async: true,
         data: $('#form_add_product').serialize(),
 
         success: function (response) {
-            console.log(response);
+
             if (response == 'error') {
                 $('.alertAddProduct').html('<p style="color: red;">Error al agregar el producto.</p>');
             } else {
@@ -171,15 +251,13 @@ function sendDataProduct() {
                 $('.alertAddProduct').html('<p>Producto guardado correctamente</p>');
             }
         },
-
         error: function (error) {
-            console.log(error);
         }
 
     });
 }
 
-//Eliminar Producto
+//  Eliminar Producto
 function delProduct() {
 
     var pr = $('#producto_id').val();
@@ -187,12 +265,12 @@ function delProduct() {
 
     $.ajax({
         url: 'ajax.php',
-        type: 'POST',
+        type: "POST",
         async: true,
         data: $('#form_del_product').serialize(),
 
         success: function (response) {
-            console.log(response);
+
             if (response == 'error') {
                 $('.alertAddProduct').html('<p style="color: red;">Error al eliminar el producto.</p>');
             } else {
@@ -203,7 +281,7 @@ function delProduct() {
         },
 
         error: function (error) {
-            console.log(error);
+
         }
 
     });

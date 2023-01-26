@@ -25,7 +25,7 @@ include "../conexion.php";
 
         if (!empty($_REQUEST['busqueda'])) {
             $busqueda = strtolower($_REQUEST['busqueda']);
-            $where = "(pto.descripcion LIKE '%$busqueda%') AND pto.estatus = 1";
+            $where = "(pto.cod_barra LIKE '%$busqueda%' OR pto.descripcion LIKE '%$busqueda%') AND pto.estatus = 1";
             $buscar = 'busqueda=' . $busqueda;
         }
 
@@ -46,6 +46,7 @@ include "../conexion.php";
         <table>
             <tr>
                 <th><b>Nº</b></th>
+                <th><b>Codigo de barra</b></th>
                 <th><b>Producto</b></th>
                 <th><b>Precio</b></th>
                 <th><b>Cantidad</b></th>
@@ -99,7 +100,7 @@ include "../conexion.php";
             $desde = ($pagina - 1) * $por_pagina;
             $total_paginas = ceil($total_registro / $por_pagina);
 
-            $query = mysqli_query($conection, "SELECT cod_producto, descripcion, precio, existencia, foto, pto.proveedor, pdor.proveedor FROM producto pto INNER JOIN proveedor pdor ON pto.proveedor = pdor.cod_proveedor WHERE $where AND pto.estatus = 1 ORDER BY cod_producto DESC LIMIT $desde, $por_pagina");
+            $query = mysqli_query($conection, "SELECT cod_producto, cod_barra, descripcion, precio, existencia, foto, pto.proveedor, pdor.proveedor FROM producto pto INNER JOIN proveedor pdor ON pto.proveedor = pdor.cod_proveedor WHERE $where AND pto.estatus = 1 ORDER BY cod_producto DESC LIMIT $desde, $por_pagina");
             $result = mysqli_num_rows($query);
             mysqli_close($conection);
 
@@ -115,6 +116,7 @@ include "../conexion.php";
             ?>
                     <tr class="row<?php echo $data['cod_producto']; ?>">
                         <td><?php echo $index++ ?></td>
+                        <td><?php echo $data['cod_barra'] ?></td>
                         <td><?php echo $data['descripcion'] ?></td>
                         <td class="celPrecio"><?php echo $data['precio'] ?></td>
                         <td class="celExistencia"><?php echo $data['existencia'] ?></td>
@@ -134,7 +136,6 @@ include "../conexion.php";
             <?php
                 }
             }
-
             ?>
         </table>
 

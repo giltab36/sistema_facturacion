@@ -21,21 +21,23 @@ include "../conexion.php";
         <div class="title_page">
             <h1 class="title"><i class="fa-solid fa-dollar-sign"></i> Nueva Ventas</h1>
         </div>
+
+        <!-- DATOS DEL CLIENTE -->
         <div class="datos_cliente">
             <div class="action_cliente">
-                <h4>Datos del Cliente</h4>
+                <h4><b>Datos del Cliente</b></h4>
                 <a href="#" class="btn_new btn_new_cliente"><i class="fas fa-plus"></i> Nuevo Cliente</a>
             </div>
             <forn name="form_new_cliente_venta" id="form_new_cliente_venta" class="datos">
-                <input type="hidden" name="action" value=" addCliente">
-                <input type="hidden" id="idcliente" name="idcliente" value="" required>
+                <input type="hidden" name="action" value="addCliente" readonly>
+                <input type="hidden" id="idcliente" name="idcliente" value="" required readonly>
                 <div class="wd30">
                     <label>Numero de Cedula o Ruc.</label>
                     <input type="text" name="ruc_cliente" id="ruc_cliente">
                 </div>
                 <div class="wd30">
                     <labe1>Nombre</label>
-                    <input type="text" name="nom_cliente" id="nom_cliente" disabled required>
+                        <input type="text" name="nom_cliente" id="nom_cliente" disabled required>
                 </div>
                 <div class="wd30">
                     <label>Teléfono</label>
@@ -43,7 +45,7 @@ include "../conexion.php";
                 </div>
                 <div class="wd100">
                     <label>Dirección</label>
-                    <input type="text" name="dir_ cliente" id="dir_cliente" disabled required>
+                    <input type="text" name="dir_cliente" id="dir_cliente" disabled required>
                 </div>
                 <div id="div_registro_cliente" class="wd100">
                     <button type="submit" class="btn_save"><i class="far fa-save fa-lg"></i> Guardar</button>
@@ -51,15 +53,16 @@ include "../conexion.php";
             </forn>
         </div>
 
+        <!-- DATOS DE LA VENTA -->
         <div class="datos_venta">
-            <h4>Datos de Venta</h4>
+            <h4><b>Datos de Venta</b></h4>
             <div class="datos ">
                 <div class="wd50">
-                    <label>Vendedor</label>
-                    <p>Carlos Estrada Porras</p>
+                    <label><b>Vendedor</b></label>
+                    <p><?php echo $_SESSION['nombre']; ?></p>
                 </div>
                 <div clas s="wd 50">
-                    <label>Acciones </label>
+                    <label><b>Acciones</b></label>
                     <div id="acciones_venta">
                         <a href="#" class="btn_cancel textcenter" id="btn_anular_venta"><i class="fas fa-ban"></i> Anular</a>
                         <a href="#" class="btn_new textcenter" id="btn_facturar_venta"><i class="far fa-edit"></i> Procesar</a>
@@ -68,6 +71,7 @@ include "../conexion.php";
             </div>
         </div>
 
+        <!-- TABLA DE PRODUCTOS A VENDER -->
         <table class="tbl_venta">
             <thead>
                 <tr>
@@ -107,10 +111,10 @@ include "../conexion.php";
                     <td><a class="link_delete" href="#" onclick="event.preventDefault(); del_product_detalle(1);"><i class="far fa-trash-alt"></i></a></td>
                 </tr>
             </tbody>
-            
+
         </table>
         <table class="tbl_venta line_off">
-        <tfoot>
+            <tfoot>
                 <tr>
                     <td colspan="5" class="textright">SUBTOTAL G.</td>
                     <td class="textright">1000.00</td>

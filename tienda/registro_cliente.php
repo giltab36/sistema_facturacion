@@ -9,21 +9,21 @@ if (!empty($_POST)) {
         $alert = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
-        $cedula = $_POST['cedula'];
+        $ruc = $_POST['cedula'];
         $nombre = $_POST['nombre'];
         $telefono = $_POST['telefono'];
         $direccion = $_POST['direccion'];
         $usuario_id = $_SESSION['idUser'];
 
         $result = 0;
-        if ((is_numeric($cedula)) and $cedula != 0) {
-            $query = mysqli_query($conection, "SELECT * FROM cliente WHERE cedula = '$cedula'");
+        if ((is_numeric($ruc)) and $ruc != 0) {
+            $query = mysqli_query($conection, "SELECT * FROM cliente WHERE cedula = '$ruc'");
             $result = mysqli_fetch_array($query);
         }
         if ($result > 0) {
             $alert = '<p class="msg_error">El numero de Cedula ya existe!</p>';
         } else {
-            $query_insert = mysqli_query($conection, "INSERT INTO cliente (cedula, nombre, telefono, direccion, usuario_id) VALUE ('$cedula', '$nombre', '$telefono', '$direccion', '$usuario_id')");
+            $query_insert = mysqli_query($conection, "INSERT INTO cliente (cedula, nombre, telefono, direccion, usuario_id) VALUE ('$ruc', '$nombre', '$telefono', '$direccion', '$usuario_id')");
 
             if ($query_insert) {
                 $alert = '<p class="msg_save">Cliente creado correctamente.</p>';
@@ -56,7 +56,7 @@ if (!empty($_POST)) {
 
             <form action="" method="post">
 
-                <label for="cedula">Cedula</label>
+                <label for="ruc">Cedula</label>
                 <input type="number" name="cedula" id="cedula" placeholder="Numero de Cedula">
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo">

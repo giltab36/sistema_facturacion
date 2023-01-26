@@ -9,11 +9,12 @@ include "../conexion.php";
 if (!empty($_POST)) {
 
     $alert = '';
-    if (empty($_POST['proveedor']) || empty($_POST['descripcion']) || empty($_POST['precio']) || $_POST['precio']<= 0 || empty($_POST['existencia']) || $_POST['existencia'] <=0) {
+    if (empty($_POST['proveedor']) || empty($_POST['cod_barra']) || empty($_POST['descripcion']) || empty($_POST['precio']) || $_POST['precio']<= 0 || empty($_POST['existencia']) || $_POST['existencia'] <=0) {
         $alert = '<p class="msg_error">Todos los campos son obligatorios.</p>';
     } else {
 
         $proveedor = $_POST['proveedor'];
+        $barra = $_POST['cod_barra'];
         $producto = $_POST['descripcion'];
         $precio = $_POST['precio'];
         $cantidad = $_POST['existencia'];
@@ -33,7 +34,7 @@ if (!empty($_POST)) {
             $src = $destino . $imgProducto;
         }
 
-        $query_insert = mysqli_query($conection, "INSERT INTO producto (proveedor, descripcion, precio, existencia, usuario_id, foto) VALUE ('$proveedor', '$producto', '$precio', '$cantidad', '$usuario_id', '$imgProducto')");
+        $query_insert = mysqli_query($conection, "INSERT INTO producto (proveedor, cod_barra, descripcion, precio, existencia, usuario_id, foto) VALUE ('$proveedor', '$barra', '$producto', '$precio', '$cantidad', '$usuario_id', '$imgProducto')");
 
         if ($query_insert) {
             if($nombre_foto != ''){
@@ -86,6 +87,9 @@ if (!empty($_POST)) {
                     }
                     ?>
                 </select>
+                <label for="cod_barra">Codigo de Barra:</label>
+                <input type="number" name="cod_barra" id="cod_barra" placeholder="Ingrese el codigo de barra">
+
                 <label for="descripcion">Producto:</label>
                 <input type="text" name="descripcion" id="descripcion" placeholder="Nombre del producto">
 
