@@ -50,12 +50,13 @@ if (!empty($_SESSION['active'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
     <title>Iniciar Sesion</title>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" type="image/png" href="./images/logo.png" sizes="16x16">
 </head>
 
-<body style="background: url('./images/fondo.jpg') no-repeat; background-size: cover; background-position: center;">
+<body style="background: url('./images/fondo_login_5.jpg') no-repeat; background-size: 100% 100%; background-position: center;">
 
     <div class="content">
         <form action="" method="post">
