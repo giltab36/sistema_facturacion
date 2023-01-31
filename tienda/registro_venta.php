@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-
 include "../conexion.php";
 
 ?>
@@ -28,7 +27,7 @@ include "../conexion.php";
                 <h4><b>Datos del Cliente</b></h4>
                 <a href="#" class="btn_new btn_new_cliente"><i class="fas fa-plus"></i> Nuevo Cliente</a>
             </div>
-            <forn method="POST" name="form_new_cliente_venta" id="form_new_cliente_venta" class="datos">
+            <form method="POST" name="form_new_cliente_venta" id="form_new_cliente_venta" class="datos">
                 <input type="hidden" name="action" value="addCliente" readonly>
                 <input type="hidden" id="idcliente" name="idcliente" value="" required readonly>
                 <div class="wd30">
@@ -50,7 +49,7 @@ include "../conexion.php";
                 <div id="div_registro_cliente" class="wd100">
                     <button type="submit" class="btn_save"><i class="far fa-save fa-lg"></i> Guardar</button>
                 </div>
-            </forn>
+            </form>
         </div>
 
         <!-- DATOS DE LA VENTA -->

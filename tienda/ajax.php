@@ -113,5 +113,11 @@ if (!empty($_POST)) {
         echo $msg;
         exit;
     }
+
+    //  Agregar producto al detalle
+    if ($_POST['action'] == 'addProductoDetalle') {
+        print_r($_POST);
+        exit;
+    }
 }
 exit;

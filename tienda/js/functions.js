@@ -191,8 +191,7 @@ $(document).ready(function () {
 
             success: function (response) {
 
-                console.log(response);
-                /*if (response != 'error') {
+                if (response != "error") {
                     //  Agregar id a input hidden
                     $('#idcliente').val(response);
                     //  Bloquear campos
@@ -205,7 +204,7 @@ $(document).ready(function () {
 
                     //  Ocultar boton guardar
                     $('#div_registro_cliente').slideUp();
-                }*/
+                }
             },
             error: function (error) {
             }
@@ -267,13 +266,40 @@ $(document).ready(function () {
         e.preventDefault();
 
         var precio_total = $(this).val() * $('#txt_precio').html();
+        var existencia = parseInt($('#txt_existencia').html());
         $('#txt_precio_total').html(precio_total);
 
+
         //Ocultar el boton agregar si la cantidad es menor que 1
-        if ($(this).val() < 1 || isNaN($(this).val())) {
+        if (($(this).val() < 1 || isNaN($(this).val())) || ($(this).val() > existencia)) {
             $('#add_product_venta').slideUp();
         } else {
             $('#add_product_venta').slideDown();
+        }
+    });
+
+    //  Agregar producto al detalle
+    $('#add_product_venta').click(function (e) {
+        e.preventDefault();
+
+        if ($('#txt_cant_producto').val() > 0) {
+            var codproducto = $('#txt_cod_barra').val();
+            var cantidad = $('#txt_cant_producto').val();
+            var action = 'addProductoDetalle';
+
+            $.ajax({
+                url: 'ajax.php',
+                type: "POST",
+                async: true,
+                data: { action: action, producto: codproducto, cantidad: cantidad },
+
+                success: function (response) {
+                    console.log();
+                },
+                error: function (error) {
+
+                }
+            });
         }
     });
 
