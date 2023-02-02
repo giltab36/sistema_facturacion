@@ -294,7 +294,28 @@ $(document).ready(function () {
                 data: { action: action, producto: codproducto, cantidad: cantidad },
 
                 success: function (response) {
-                    console.log();
+                    if (response != 'error') {
+                        var info = JSON.parse(response);
+                        $('#detalle_venta').html(info.detalle);
+                        $('#detalle_totales').html(info.totales);
+
+                        //  Limpiar campos
+                        $('#txt_cod_barra').val('');
+                        $('#txt_descripcion').html('-');
+                        $('#txt_existencia').html('-');
+                        $('#txt_cant_producto').val('0');
+                        $('#txt_precio').html('0.00');
+                        $('#txt_precio_total').html('0.00');
+
+                        //  Bloquear Cantidad
+                        $('#txt_cant_producto').attr('disabled', 'disbled');
+
+                        //  Ocultar boton agregar
+                        $('#add_product_venta').slideUp();
+                    } else {
+                        console.log('no data');
+                    }
+                    viewProcesar();
                 },
                 error: function (error) {
 
@@ -303,7 +324,120 @@ $(document).ready(function () {
         }
     });
 
+    /* ======    Anular venta    ======*/
+    $('#btn_anular_venta').click(function (e) {
+        e.preventDefault();
+
+        var rows = $('#detalle_venta tr').length;
+        if (rows > 0) {
+            var action = 'anularVenta';
+
+            $.ajax({
+                url: 'ajax.php',
+                type: "POST",
+                async: true,
+                data: { action: action },
+
+                success: function (response) {
+                    if (response != 'error') {
+                        location.reload();
+                    }
+                },
+                error: function (error) {
+                }
+            })
+        }
+    });
+
 }); //  End Ready
+
+
+
+
+
+
+/* ======    Eliminar los datos del detalle de la venta    ====== */
+function del_product_detalle(correlativo) {
+    var action = 'delProductoDetalle';
+    var id_detalle = correlativo;
+
+    $.ajax({
+        url: 'ajax.php',
+        type: "POST",
+        async: true,
+        data: { action: action, id_detalle: id_detalle },
+
+        success: function (response) {
+
+            if (response != 'error') {
+                var info = JSON.parse(response);
+                $('#detalle_venta').html(info.detalle);
+                $('#detalle_totales').html(info.totales);
+
+                //  Limpiar campos
+                $('#txt_cod_barra').html('');
+                $('#txt_descripcion').html('-');
+                $('#txt_existencia').html('-');
+                $('#txt_cant_producto').val('0');
+                $('#txt_precio').html('0.00');
+                $('#txt_precio_total').html('0.00');
+
+                //  Bloquear Cantidad
+                $('#txt_cant_producto').attr('disabled', 'disbled');
+
+                //  Ocultar boton agregar
+                $('#add_product_venta').slideUp();
+
+            } else {
+                $('#detalle_venta').html('');
+                $('#detalle_totales').html('');
+            }
+            viewProcesar();
+        },
+        error: function (error) {
+
+        }
+    });
+}
+
+/* ======    Mostras / Ocultar boton procesar    ====== */
+function viewProcesar() {
+    if ($('#detalle_venta tr').length > 0) {
+        $('#btn_facturar_venta').show();
+    } else {
+        $('#btn_facturar_venta').hide();
+    }
+}
+
+/* ======   Buscar detalles de la venta    ====== */
+function serchForDetalle(id) {
+    var action = 'serchForDetalle';
+    var user = id;
+
+    $.ajax({
+        url: 'ajax.php',
+        type: "POST",
+        async: true,
+        data: { action: action, user: user },
+
+        success: function (response) {
+
+            if (response != 'error') {
+
+                var info = JSON.parse(response);
+                $('#detalle_venta').html(info.detalle);
+                $('#detalle_totales').html(info.totales);
+
+            } else {
+                console.log('no data');
+            }
+            viewProcesar();
+        },
+        error: function (error) {
+
+        }
+    });
+}
 
 //  Buscador de proveedor o producto
 function getUrl() {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-01-2023 a las 05:16:44
+-- Tiempo de generación: 02-02-2023 a las 04:42:04
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -41,6 +41,30 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_precio_producto` (`n_can
         
     END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_detalle_temp` (`codigo` INT, `cantidad` INT, `token_user` VARCHAR(50))   BEGIN
+
+		DECLARE precio_actual decimal(10,2);
+		SELECT precio INTO precio_actual FROM producto WHERE cod_producto = codigo;
+
+		INSERT INTO detalle_temp(token_user, cod_producto, cantidad, precio_venta) VALUE(token_user, codigo, cantidad, precio_actual);
+
+		SELECT tmp.correlativo, tmp.cod_producto, p.descripcion, tmp.cantidad, tmp.precio_venta FROM detalle_temp tmp
+		INNER JOIN producto p
+		ON tmp.cod_producto = p.cod_producto
+		WHERE tmp.token_user = token_user;
+
+	END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `del_detalle_temp` (`id_detalle` INT, `token` VARCHAR(50))   BEGIN
+		DELETE FROM detalle_temp WHERE correlativo = id_detalle;
+
+		SELECT tmp.correlativo, tmp.cod_producto, p.descripcion, tmp.cantidad, tmp.precio_venta FROM detalle_temp tmp
+		INNER JOIN producto p
+		ON tmp.cod_producto = p.cod_producto
+		WHERE tmp.token_user = token;
+
+	END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -70,7 +94,8 @@ INSERT INTO `cliente` (`id_cliente`, `cedula`, `nombre`, `telefono`, `direccion`
 (3, 45456456, 'Hector Villalba', '09416486', 'B° Sirena', '2022-09-17 09:26:41', 1, 1),
 (4, 4845645, 'David Aranda', '096345866', 'B° Maria Graciela', '2022-09-17 09:27:21', 1, 1),
 (5, 122222, 'Carlos', '0972406538', 'San Ignacio', '2022-10-14 18:34:11', 1, 0),
-(6, 4564456, 'gxhjfc', '05641864', 'Mburukuja', '2023-01-23 14:17:57', 1, 1);
+(6, 4564456, 'gxhjfc', '05641864', 'Mburukuja', '2023-01-23 14:17:57', 1, 1),
+(7, 7541962, 'Luz Villar', '0975216384', 'Encarnacion', '2023-01-26 22:41:32', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +132,7 @@ CREATE TABLE `detalle_factura` (
   `no_factura` bigint(11) NOT NULL,
   `cod_producto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `precio_total` decimal(10,2) NOT NULL
+  `precio_venta` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -123,6 +148,13 @@ CREATE TABLE `detalle_temp` (
   `cantidad` int(11) NOT NULL,
   `precio_venta` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detalle_temp`
+--
+
+INSERT INTO `detalle_temp` (`correlativo`, `token_user`, `cod_producto`, `cantidad`, `precio_venta`) VALUES
+(33, 'c4ca4238a0b923820dcc509a6f75849b', 1, 1, '82000.00');
 
 -- --------------------------------------------------------
 
@@ -178,7 +210,7 @@ INSERT INTO `entradas` (`correlativo`, `cod_producto`, `fecha`, `cantidad`, `pre
 
 CREATE TABLE `factura` (
   `no_factura` bigint(11) NOT NULL,
-  `fecha` datetime NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT current_timestamp(),
   `usuario` int(11) NOT NULL,
   `cod_cliente` int(11) NOT NULL,
   `total_factura` decimal(10,2) NOT NULL,
@@ -409,7 +441,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -427,7 +459,7 @@ ALTER TABLE `detalle_factura`
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `correlativo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `correlativo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `entradas`

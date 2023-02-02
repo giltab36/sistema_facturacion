@@ -2,7 +2,7 @@
 
 session_start();
 include "../conexion.php";
-
+//echo md5($_SESSION['idUser']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +11,12 @@ include "../conexion.php";
     <meta charset="UTF-8">
     <?php include "include/script.php"; ?>
     <title>Registro de Ventas</title>
+    <script type="text/javascript">
+            $(document).ready(function() {
+                var usuarioid = '<?php echo $_SESSION['idUser']; ?>'
+                serchForDetalle(usuarioid)
+            });
+        </script>
 </head>
 
 <body>
@@ -64,7 +70,7 @@ include "../conexion.php";
                     <label><b>Acciones</b></label>
                     <div id="acciones_venta">
                         <a href="#" class="btn_cancel textcenter" id="btn_anular_venta"><i class="fas fa-ban"></i> Anular</a>
-                        <a href="#" class="btn_new textcenter" id="btn_facturar_venta"><i class="far fa-edit"></i> Procesar</a>
+                        <a href="#" class="btn_new textcenter" id="btn_facturar_venta" style="display: none;"><i class="far fa-edit"></i> Procesar</a>
                     </div>
                 </div>
             </div>
@@ -101,40 +107,18 @@ include "../conexion.php";
                 </tr>
             </thead>
             <tbody id="detalle_venta">
-                <tr>
-                    <td>1</td>
-                    <td colspan="2">Mouse USB</td>
-                    <td class="textcenter">1</td>
-                    <td class="textright">100.00</td>
-                    <td class="textright">100.00</td>
-                    <td><a class="link_delete" href="#" onclick="event.preventDefault(); del_product_detalle(1);"><i class="far fa-trash-alt"></i></a></td>
-                </tr>
+                <!--    CONTENIDO AJAX    -->
             </tbody>
-
-        </table>
-        <table class="tbl_venta line_off">
-            <tfoot>
-                <tr>
-                    <td colspan="5" class="textright">SUBTOTAL G.</td>
-                    <td class="textright">1000.00</td>
-                </tr>
-                <tr>
-                    <td colspan="5" class="textright">IVA (10%)</td>
-                    <td class="textright">52</td>
-                </tr>
-                <tr>
-                    <td colspan="5" class="textright">TOTAL G.</td>
-                    <td class="textright">1000.00</td>
-                </tr>
+            <tfoot class="tbl_venta line_off" id="detalle_totales">
+                <!--    CONTENIDO AJAX    -->
             </tfoot>
+
         </table>
-
-
-
 
     </section>
+    
+    <?php include "include/footer.php";?>
 
-    <?php include "include/footer.php"; ?>
 </body>
 
 </html>
