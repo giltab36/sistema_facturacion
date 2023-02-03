@@ -12,11 +12,11 @@ include "../conexion.php";
     <?php include "include/script.php"; ?>
     <title>Registro de Ventas</title>
     <script type="text/javascript">
-            $(document).ready(function() {
-                var usuarioid = '<?php echo $_SESSION['idUser']; ?>'
-                serchForDetalle(usuarioid)
-            });
-        </script>
+        $(document).ready(function() {
+            var usuarioid = '<?php echo $_SESSION['idUser']; ?>'
+            serchForDetalle(usuarioid)
+        });
+    </script>
 </head>
 
 <body>
@@ -41,8 +41,8 @@ include "../conexion.php";
                     <input type="text" name="ruc_cliente" id="ruc_cliente">
                 </div>
                 <div class="wd30">
-                    <labe1>Nombre</label>
-                        <input type="text" name="nom_cliente" id="nom_cliente" disabled required>
+                    <label>Nombre</label>
+                    <input type="text" name="nom_cliente" id="nom_cliente" disabled required>
                 </div>
                 <div class="wd30">
                     <label>Teléfono</label>
@@ -116,8 +116,8 @@ include "../conexion.php";
         </table>
 
     </section>
-    
-    <?php include "include/footer.php";?>
+
+    <?php include "include/footer.php"; ?>
 
 </body>
 

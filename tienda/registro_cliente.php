@@ -57,11 +57,11 @@ if (!empty($_POST)) {
             <form action="" method="post">
 
                 <label for="ruc">Cedula</label>
-                <input type="number" name="cedula" id="cedula" placeholder="Numero de Cedula">
+                <input type="text" name="cedula" id="cedula" placeholder="Numero de Cedula">
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo">
                 <label for="telefono">Teléfono</label>
-                <input type="number" name="telefono" id="telefono" placeholder="Numero de telefono">
+                <input type="text" name="telefono" id="telefono" placeholder="Numero de telefono">
                 <label for="direccion">Dirección</label>
                 <input type="text" name="direccion" id="direccion" placeholder="Direccion completa">
 

@@ -60,7 +60,7 @@ include "../conexion.php";
                 $index = 1;
                 while ($data = mysqli_fetch_array($query)) {
                     if ($data["cedula"] == 0) {
-                        $ruc = 'C/F';
+                        $ruc = 'S/C';
                     } else {
                         $ruc = $data["cedula"];
                     }
