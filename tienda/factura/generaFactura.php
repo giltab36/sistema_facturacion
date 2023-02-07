@@ -33,17 +33,15 @@
 												 v.nombre as vendedor,
 												 cl.cedula, cl.nombre, cl.telefono,cl.direccion
 											FROM factura f
-											INNER JOIN usuario v
-											ON f.usuario = v.idusuario
-											INNER JOIN cliente cl
-											ON f.cod_cliente = cl.id_cliente
+											INNER JOIN usuario v ON f.usuario = v.id_usuario
+											INNER JOIN cliente cl ON f.cod_cliente = cl.id_cliente
 											WHERE f.no_factura = $noFactura AND f.cod_cliente = $codCliente  AND f.estatus != 10 ");
 
 		$result = mysqli_num_rows($query);
 		if($result > 0){
 
 			$factura = mysqli_fetch_assoc($query);
-			$no_factura = $factura['nofactura'];
+			$no_factura = $factura['no_factura'];
 
 			if($factura['estatus'] == 2){
 				$anulada = '<img class="anulada" src="img/anulado.png" alt="Anulada">';
@@ -51,10 +49,8 @@
 
 			$query_productos = mysqli_query($conection,"SELECT p.descripcion,dt.cantidad,dt.precio_venta,(dt.cantidad * dt.precio_venta) as precio_total
 														FROM factura f
-														INNER JOIN detallefactura dt
-														ON f.no_factura = dt.no_factura
-														INNER JOIN producto p
-														ON dt.cod_producto = p.cod_producto
+														INNER JOIN detalle_factura dt ON f.no_factura = dt.no_factura
+														INNER JOIN producto p ON dt.cod_producto = p.cod_producto
 														WHERE f.no_factura = $no_factura ");
 			$result_detalle = mysqli_num_rows($query_productos);
 

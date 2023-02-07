@@ -31,7 +31,7 @@
 					<span class="h2"><?php echo strtoupper($configuracion['nombre']); ?></span>
 					<p><?php echo $configuracion['razon_social']; ?></p>
 					<p><?php echo $configuracion['direccion']; ?></p>
-					<p>Ruc: <?php echo $configuracion['cedula']; ?></p>
+					<p>Ruc: <?php echo $configuracion['ruc']; ?></p>
 					<p>Teléfono: <?php echo $configuracion['telefono']; ?></p>
 					<p>Email: <?php echo $configuracion['email']; ?></p>
 				</div>
