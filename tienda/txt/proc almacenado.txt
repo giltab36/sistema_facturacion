@@ -101,18 +101,28 @@ DELIMITER $$
 
 			INSERT INTO detalle_factura(no_factura, cod_producto, cantidad, precio_venta) SELECT (factura) AS nofactura, cod_producto, cantidad, precio_venta FROM detalle_temp WHERE token_user = token;
 
-			WHILE a <= registro DO
+			WHILE a <= registros DO
 				SELECT cod_prod, cant_prod INTO tmp_cod_producto, tmp_cant_producto FROM tbl_tmp_tokenuser WHERE id = a;
+				SELECT existencia INTO existencia_actual FROM producto WHERE cod_producto = tmp_cod_producto;
+
+				SET nueva_existencia = existencia_actual - tmp_cant_producto;
+				UPDATE producto SET existencia = nueva_existencia WHERE cod_producto = tmp_cod_producto;
+
+				SET a = a + 1;
+
 			END WHILE;
 
+			SET total = (SELECT SUM (cantidad * precio_venta) FROM detalle_temp WHERE token_user = token);
+			UPDATE factura SET total_factura = total WHERE no_factura = factura;
+			DELETE FROM detalle_temp WHERE token_user = token;
+			TRUNCATE TABLE tbl_tmp_tokenuser;
+			SELECT * FROM factura WHERE no_factura = factura;
+
 		ELSE
+
+			SELECT 0;
 
 		END IF;
 
 	END;$$
 DELIMITER ;
-
-
-
-
-			MIRAR EL VIDEO 61 MINUTO 13:55

@@ -157,7 +157,7 @@ $(document).ready(function () {
                     $('.btn_new_cliente').slideDown();
                 } else {
                     var data = $.parseJSON(response);
-                    $('#idcliente').val(data.idcliente);
+                    $('#idcliente').val(data.id_cliente);
                     $('#nom_cliente').val(data.nombre);
                     $('#tel_cliente').val(data.telefono);
                     $('#dir_cliente').val(data.direccion);
@@ -341,6 +341,35 @@ $(document).ready(function () {
                 success: function (response) {
                     if (response != 'error') {
                         location.reload();
+                    }
+                },
+                error: function (error) {
+                }
+            })
+        }
+    });
+
+    /* ======    Facturar Venta    ======*/
+    $('#btn_facturar_venta').click(function (e) {
+        e.preventDefault();
+
+        var rows = $('#detalle_venta tr').length;
+        if (rows > 0) {
+            var action = 'procesarVenta';
+            var codcliente = $('#idcliente').val();
+
+            $.ajax({
+                url: 'ajax.php',
+                type: "POST",
+                async: true,
+                data: { action: action, codcliente: codcliente },
+
+                success: function (response) {
+
+                    if (response != 'error') {
+                        location.reload();
+                    } else {
+                        console.log('no data');
                     }
                 },
                 error: function (error) {
