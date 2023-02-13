@@ -639,7 +639,7 @@ table td {
 }
 
 .datos {
-    background-color:  rgba(192, 192, 192, 0.377);
+    background-color: rgba(192, 192, 192, 0.377);
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flex;
@@ -730,7 +730,89 @@ table td {
     color: #FFF;
 }
 
-.line_off tr:nth-child(odd){
+.line_off tr:nth-child(odd) {
     border-top: 0;
     border-bottom: 0;
+}
+
+/*============ Busqueda por fecha de Ventas ============*/
+
+.form_search_date {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 10px;
+    margin: 10px auto;
+    width: 50%;
+}
+
+.form_search_date label {
+    margin: 0 10px;
+}
+
+h5 {
+    color: silver;
+}
+
+.form_search_date .btn_view {
+    padding: 8px;
+}
+
+.btn_view {
+    background-color: #1faac8;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0 3px;
+    color: #fff;
+}
+
+.btn_ver {
+    background-color: #42b343;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0 3px;
+    color: #fff;
+}
+
+/*============ Boton de acciones PDF ============*/
+
+.div_acciones{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+}
+
+.totalfactura{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagada, .anulada{
+    color: whitesmoke;
+    background: #60a756;
+    text-align: center;
+    border-radius: 5px;
+    padding: 4px 15px;
+}
+
+.anulada{
+    background: #f36a6a;
+}
+
+.inactive{
+    background-color: #a4a4a4;
+    color: #ccc;
+    cursor: default;
 }

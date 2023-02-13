@@ -32,6 +32,7 @@ include "../conexion.php";
             <div class="action_cliente">
                 <h4><b>Datos del Cliente</b></h4>
                 <a href="#" class="btn_new btn_new_cliente"><i class="fas fa-plus"></i> Nuevo Cliente</a>
+                <a href="lista_venta.php" class="btn_new"><i class="fa-solid fa-cart-plus"></i> Lista de Venta</a>
             </div>
             <form method="POST" name="form_new_cliente_venta" id="form_new_cliente_venta" class="datos">
                 <input type="hidden" name="action" value="addCliente" readonly>
