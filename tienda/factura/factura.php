@@ -4,7 +4,8 @@
 	$impuesto 	= 0;
 	$tl_sniva   = 0;
 	$total 		= 0;
- //print_r($configuracion); ?>
+ //print_r($configuracion); 
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

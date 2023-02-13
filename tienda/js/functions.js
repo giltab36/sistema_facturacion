@@ -547,7 +547,7 @@ function delProduct() {
     });
 }
 
-
+//  Cierre de Modal
 function closeModal() {
     $('.alertAddProduct').html('');
     $('#txtCantidad').val('');
