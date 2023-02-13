@@ -12,6 +12,7 @@
 
 	include "../../conexion.php";
 	require_once '../pdf/vendor/autoload.php';
+	require_once '../pdf/vendor/Dompdf\Dompdf/src/Options.php';
 	use Dompdf\Dompdf;
 
 	if(empty($_REQUEST['cl']) || empty($_REQUEST['f']))
@@ -54,16 +55,16 @@
 														WHERE f.no_factura = $no_factura ");
 			$result_detalle = mysqli_num_rows($query_productos);
 
-			ob_start();
+			/* ob_start();
 		    include(dirname('__FILE__').'./factura/factura.php');
-		    $html = ob_get_clean();
+		    $html = ob_get_clean(); */
 
 			// instantiate and use the dompdf class
 			$dompdf = new Dompdf();
 
 			$dompdf->loadHtml($html);
 			// (Optional) Setup the paper size and orientation
-			$dompdf->setPaper('letter', 'portrait');
+			$dompdf->setPaper('A4', 'portrait');
 			// Render the HTML as PDF
 			$dompdf->render();
 			// Output the generated PDF to Browser

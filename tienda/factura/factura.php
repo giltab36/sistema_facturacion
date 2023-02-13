@@ -4,6 +4,9 @@ $iva 	 	= 0;
 $impuesto 	= 0;
 $tl_sniva   = 0;
 $total 		= 0;
+
+ob_start();
+
 //print_r($configuracion); 
 
 include "../../conexion.php";
@@ -66,7 +69,7 @@ if (empty($_REQUEST['cl']) || empty($_REQUEST['f'])) {
 			<tr>
 				<td class="logo_factura">
 					<div>
-						<img src="img/logo.png">
+						<img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/Sistema-de-Venta/tienda/factura/img/logo.png">
 					</div>
 				</td>
 				<td class="info_empresa">
@@ -205,3 +208,22 @@ if (empty($_REQUEST['cl']) || empty($_REQUEST['f'])) {
 </body>
 
 </html>
+
+<?php
+$html = ob_get_clean();
+
+require_once '../lib/dompdf/autoload.inc.php';
+use Dompdf\Dompdf;
+$dompdf = new Dompdf();
+
+$options = $dompdf->getOptions();
+$options->set(array('isRemoteEnabled' => true));
+$dompdf->setOptions($options);
+
+//	Carga del HTML
+$dompdf->loadHtml($html);
+$dompdf->setPaper('A4', 'portrait');
+$dompdf->render();
+$dompdf->stream('factura_' . $noFactura . '.pdf', array('Attachment' => false));
+
+?>

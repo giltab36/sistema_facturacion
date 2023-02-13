@@ -104,8 +104,8 @@ $(document).ready(function () {
                         '<input type="hidden" name="producto_id" id="producto_id" value="' + info.cod_producto + '" required readonly>' +
                         '<input type="hidden" name="action" value="delProduct" readonly>' +
                         '<div class="alert alertAddProduct"></div>' +
-                        '<a href="#" class="btn_cancel" onclick="closeModal()";> Cerrar</a>' +
                         '<button type="submit" class="btn_ok"> Eliminar</button>' +
+                        '<a href="#" class="btn_cancel" onclick="closeModal()";> Cerrar</a>' +
                         '</form>');
                 }
             },
@@ -380,11 +380,83 @@ $(document).ready(function () {
         }
     });
 
+    //  Modal Form Anular Factura
+    $('.anular_factura').click(function (event) {
+        event.preventDefault();
+
+        var nofactura = $(this).attr('fac');
+        var action = 'infoFactura';
+
+        $.ajax({
+            url: 'ajax.php',
+            type: "POST",
+            async: true,
+            data: { action: action, nofactura: nofactura },
+
+            success: function (response) {
+                if (response != 'error') {
+                    var info = JSON.parse(response);
+
+                    $('.bodyModal').html('<form action="" method="POST" name="form_anular_factura" id="form_anular_factura" onsubmit="event.preventDefault(); anularFactura();">' +
+                        '<h1><i class="fas fa-cubes" style="font-size: 45pt;"></i> <br> Anular Factura</h1>' +
+                        '<p><b>¿Seguro que desea eliminar la siguiente factura?</b></p>' +
+                        '<p><strong>Nro.' + info.no_factura + '</strong></p>' +
+                        '<p><strong>Monto ₲. ' + info.total_factura + '</strong></p>' +
+                        '<p><strong>Fecha.' + info.fecha + '</strong></p>' +
+                        '<input type="hidden" name="action" value="anularFactura">' +
+                        '<input type="hidden" name="no_factura" id="no_factura" value="' + info.no_factura + '" required>' +
+                        '<div class="alert alertAddProduct"></div>' +
+                        '<button type="submit" class="btn_ok"> Anular</button>' +
+                        '<a href="#" class="btn_cancel" onclick="closeModal()";> Cerrar</a>' +
+                        '</form>');
+                }
+            },
+            error: function (error) {
+            }
+        });
+        $('.modal').fadeIn();
+    });
+
+    //  Ver Factura
+    $('.view_factura').click(function (e) {
+        e.preventDefault();
+        var codCliente = $(this).attr('cl');
+        var noFactura = $(this).attr('f');
+        generarPDF(codCliente, noFactura);
+    });
+
 }); //  End Ready
 
 
 
+//  Anular Factura
+function anularFactura() {
+    var noFactura = $('#no_factura').val();
+    var action = 'anularFactura';
 
+    $.ajax({
+        url: 'ajax.php',
+        type: "POST",
+        async: true,
+        data: { action: action, noFactura: noFactura },
+
+        success: function (response) {
+            if (response == 'error') {
+                $('.alertAddProduct').html('<p style="color: red;"> Error al anular la factura.</p>');
+
+            } else {
+                $('#row_' + noFactura + ' .estado').html('<span class="anulada"> Anulada</span>');
+                $('#form_anular_factura .btn_ok').remove();
+                $('#row_' + noFactura + ' .div_factura').html('<button type="button" class="btn_anular inactive"><i class="fas fa-ban"></i></button>')
+                $('.alertAddProduct').html('<p style="color: green;">Factura anulada.</p>');
+            }
+        },
+        error: function (error) {
+        }
+    });
+}
+
+//  Generar y centrar PDF
 function generarPDF(cliente, factura) {
     var ancho = 1000;
     var alto = 800;
@@ -394,7 +466,7 @@ function generarPDF(cliente, factura) {
     var y = parseInt((window.screen.height / 2) - (alto / 2));
 
     $url = 'factura/factura.php?cl=' + cliente + '&f=' + factura;
-    window.open($url, "Factura", "left=" + x + ", top=" + y + ", heigth=" + alto + ", whidth=" + ancho + ", scrollbar=si, location=no, resizable=si, menubar=no");
+    window.open($url, "Factura", "left=" + x + ", top=" + y + ", heigth=" + alto + ", whidth=" + ancho + ", scrollbar=si, location=no, resizable=si, menubar=si");
 }
 
 /* ======    Eliminar los datos del detalle de la venta    ====== */

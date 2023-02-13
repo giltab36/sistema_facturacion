@@ -611,7 +611,8 @@ table td {
 }
 
 #form_add_product,
-#form_del_product {
+#form_del_product,
+#form_anular_factura {
     width: 420px;
     text-align: center;
 }

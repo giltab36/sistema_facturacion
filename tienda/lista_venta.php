@@ -91,19 +91,19 @@ include "../conexion.php";
                         <td><?php echo $data['hora'] ?></td>
                         <td><?php echo $data['cliente'] ?></td>
                         <td><?php echo $data['vendedor'] ?></td>
-                        <td><?php echo $estado ?></td>
+                        <td class="estado"><?php echo $estado ?></td>
                         <td class="textright totalfactura"><span>₲.</span><?php echo $data["total_factura"]; ?></td>
                         <td class="textright">
                             <div class="div_acciones">
                                 <div>
-                                    <button class="btn_ver viw_factura" type="button" cl="<?php echo $data["cod_cliente"]; ?>" f="<?php echo $data["no_factura"] ?>"><i class="fas fa-eye"></i></button>
+                                    <button class="btn_ver view_factura" type="button" cl="<?php echo $data["cod_cliente"]; ?>" f="<?php echo $data["no_factura"] ?>"><i class="fas fa-eye"></i></button>
                                 </div>
 
                                 <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
                                     if ($data["estatus"] == 1) { ?>
                                         <div class="div_factura">
                                             <div>
-                                                <button class="btn_anular anular_factura" fac="<?php echo $data["no_factura"] ?>"><i class="fas fa-ban"></i></button>
+                                                <button class="btn_anular anular_factura" fac="<?php echo $data['no_factura'] ?>"><i class="fas fa-ban"></i></button>
                                             </div>
                                         </div>
                                     <?php } else { ?>

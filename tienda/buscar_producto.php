@@ -46,7 +46,7 @@ include "../conexion.php";
         <table>
             <tr>
                 <th><b>Nº</b></th>
-                <th><b>Codigo de barra</b></th>
+                <!-- <th><b>Codigo de barra</b></th> -->
                 <th><b>Producto</b></th>
                 <th><b>Precio</b></th>
                 <th><b>Cantidad</b></th>
@@ -116,7 +116,7 @@ include "../conexion.php";
             ?>
                     <tr class="row<?php echo $data['cod_producto']; ?>">
                         <td><?php echo $index++ ?></td>
-                        <td><?php echo $data['cod_barra'] ?></td>
+                        <!-- <td><?php echo $data['cod_barra'] ?></td> -->
                         <td><?php echo $data['descripcion'] ?></td>
                         <td class="celPrecio"><?php echo $data['precio'] ?></td>
                         <td class="celExistencia"><?php echo $data['existencia'] ?></td>
