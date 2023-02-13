@@ -99,7 +99,7 @@ DELIMITER $$
 			INSERT INTO factura(usuario, cod_cliente) VALUE (cod_usuario, cod_cliente);
 			SET factura = LAST_INSERT_ID();
 
-			INSERT INTO detalle_factura(no_factura, cod_producto, cantidad, precio_venta) SELECT (factura) AS nofactura, cod_producto, cantidad, precio_venta FROM detalle_temp WHERE token_user = token;
+			INSERT INTO detalle_factura(no_factura, cod_producto, cantidad, precio_venta) SELECT (factura) AS no_factura, cod_producto, cantidad, precio_venta FROM detalle_temp WHERE token_user = token;
 
 			WHILE a <= registros DO
 				SELECT cod_prod, cant_prod INTO tmp_cod_producto, tmp_cant_producto FROM tbl_tmp_tokenuser WHERE id = a;
@@ -125,6 +125,58 @@ DELIMITER $$
 		END IF;
 
 	END;$$
+DELIMITER ;
+
+//===============================================================================//
+
+//======	Anulacion de facturas
+
+DELIMITER $$
+	CREATE PROCEDURE anular_factura(nofactura int)
+	BEGIN
+		DECLARE existe_factura int;
+		DECLARE registros int;
+		DECLARE a int;
+
+		DECLARE cod_producto int;
+		DECLARE cant_producto int;
+		DECLARE existencia_actual int;
+		DECLARE nueva_existencia int;
+
+		SET existe_factura = (SELECT COUNT(*) FROM factura WHERE no_factura = nofactura AND estatus = 1);
+
+		IF existe_factura > 0 THEN 
+			CREATE TEMPORARY TABLE tbl_tmp (
+				id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				cod_prod BIGINT,
+				cant_prod int);
+
+				SET a = 1;
+
+				SET registros = (SELECT COUNT(*) FROM detalle_factura WHERE no_factura = nofactura);
+
+				IF registros > 0 THEN
+					INSERT INTO tbl_tmp(cod_prod, cant_prod) SELECT cod_producto, cantidad FROM detalle_factura WHERE no_factura = nofactura;
+
+					WHILE a <= registros DO
+						SELECT cod_prod, cant_prod INTO cod_producto, cant_producto FROM tbl_tmp WHERE id = a;
+						SELECT existencia INTO existencia_actual FROM producto WHERE cod_producto = cod_producto;
+						SET nueva_existencia = existencia_actual + cant_producto;
+						UPDATE producto SET existencia = nueva_existencia WHERE cod_producto = cod_producto;
+
+						SET a = a+1;
+					END WHILE;
+					
+					UPDATE factura SET estatus = 2 WHERE no_factura = nofactura;
+					DROP TABLE tbl_tmp;
+					SELECT * FROM factura WHERE no_factura = nofactura;
+
+				END IF;
+		ELSE
+			SELECT 0 factura;
+		END IF;
+
+END;$$
 DELIMITER ;
 
 //===============================================================================//

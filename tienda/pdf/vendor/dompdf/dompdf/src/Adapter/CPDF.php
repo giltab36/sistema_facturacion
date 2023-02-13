@@ -106,20 +106,21 @@ class CPDF implements Canvas
      */
     protected $_dompdf;
 
-    /**
-     * Instance of Cpdf class
-     *
-     * @var \Dompdf\Cpdf
-     */
-    protected $_pdf;
-
+    
     /**
      * PDF width, in points
      *
      * @var float
      */
     protected $_width;
-
+    
+    /**
+     * Instance of Cpdf class
+     *
+     * @var \Dompdf\Cpdf
+     */
+    protected $_pdf;
+    
     /**
      * PDF height, in points
      *

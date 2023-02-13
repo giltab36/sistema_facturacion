@@ -55,7 +55,7 @@
 			$result_detalle = mysqli_num_rows($query_productos);
 
 			ob_start();
-		    include(dirname('__FILE__').'/factura.php');
+		    include(dirname('__FILE__').'./factura/factura.php');
 		    $html = ob_get_clean();
 
 			// instantiate and use the dompdf class
