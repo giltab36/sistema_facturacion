@@ -454,6 +454,7 @@ table td {
     text-align: center;
     width: 35px;
     text-decoration: none;
+    border-radius: 10px 10px 0 0;
 }
 
 .paginador a:hover {

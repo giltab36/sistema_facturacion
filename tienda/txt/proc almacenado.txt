@@ -49,7 +49,7 @@ DELIMITER ;
 
 //===============================================================================//
 
-//======	Eliminar datos de la tabla Detalles teemporales
+//======	Eliminar datos de la tabla Detalles temporales
 
 DELIMITER $$
 	CREATE PROCEDURE del_detalle_temp(id_detalle int, token varchar(50))
@@ -70,7 +70,7 @@ DELIMITER ;
 //======	Procesar venta y emicion de Factura
 
 DELIMITER $$
-	CREATE PROCEDURE precesar_venta(cod_usuario int, cod_cliente int, token varchar(50))
+	CREATE PROCEDURE procesar_venta(cod_usuario int, cod_cliente int, token varchar(50))
 	BEGIN
 		DECLARE factura int;
 
@@ -112,7 +112,7 @@ DELIMITER $$
 
 			END WHILE;
 
-			SET total = (SELECT SUM (cantidad * precio_venta) FROM detalle_temp WHERE token_user = token);
+			SET total = (SELECT SUM(cantidad * precio_venta) FROM detalle_temp WHERE token_user = token);
 			UPDATE factura SET total_factura = total WHERE no_factura = factura;
 			DELETE FROM detalle_temp WHERE token_user = token;
 			TRUNCATE TABLE tbl_tmp_tokenuser;
@@ -126,3 +126,5 @@ DELIMITER $$
 
 	END;$$
 DELIMITER ;
+
+//===============================================================================//
