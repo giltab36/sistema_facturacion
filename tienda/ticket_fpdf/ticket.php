@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $subtotal     = 0;
 $iva          = 0;
 $impuesto     = 0;
