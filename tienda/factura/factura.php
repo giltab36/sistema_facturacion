@@ -184,15 +184,15 @@ ob_start();
 			<tfoot id="detalle_totales">
 				<tr>
 					<td colspan="3" class="textright"><span>SUBTOTAL Q.</span></td>
-					<td class="textright"><span><?php echo $tl_sniva; ?></span></td>
+					<td class="textright"><span><?php echo "G. " . $tl_sniva; ?></span></td>
 				</tr>
 				<tr>
 					<td colspan="3" class="textright"><span>IVA (<?php echo $iva; ?> %)</span></td>
-					<td class="textright"><span><?php echo $impuesto; ?></span></td>
+					<td class="textright"><span><?php echo "G. " . $impuesto; ?></span></td>
 				</tr>
 				<tr>
 					<td colspan="3" class="textright"><span>TOTAL G.</span></td>
-					<td class="textright"><span><?php echo $total; ?></span></td>
+					<td class="textright"><span><?php echo "G. " . $total; ?></span></td>
 				</tr>
 			</tfoot>
 		</table>

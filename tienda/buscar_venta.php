@@ -46,6 +46,8 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
         $where = "fecha BETWEEN '$f_de' AND '$f_a'";
         $buscar = "fecha_de=$fecha_de&fecha_a=$fecha_a";
     }
+}else{
+    header("location: lista_venta.php");
 }
 ?>
 <!DOCTYPE html>
@@ -84,7 +86,7 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
         <table>
             <tr>
                 <th><b>Nº</b></th>
-                <th><b>Fecha</b></th>
+                <th><b>Fecha / Hora</b></th>
                 <!-- <th><b>Hora</b></th> -->
                 <th><b>Cliente</b></th>
                 <th><b>Vendedor</b></th>

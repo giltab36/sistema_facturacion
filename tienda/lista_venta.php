@@ -39,7 +39,7 @@ include "../conexion.php";
         <table>
             <tr>
                 <th><b>Nº</b></th>
-                <th><b>Fecha</b></th>
+                <th><b>Fecha / Hora</b></th>
                 <!-- <th><b>Hora</b></th> -->
                 <th><b>Cliente</b></th>
                 <th><b>Vendedor</b></th>
