@@ -349,7 +349,7 @@ $(document).ready(function () {
         }
     });
 
-    /* ======    Facturar Venta    ======*/
+    /* ======    Facturar Venta a Factura    ======*/
     $('#btn_facturar_venta').click(function (e) {
         e.preventDefault();
 
@@ -369,6 +369,37 @@ $(document).ready(function () {
                     if (response != 'error') {
                         var info = JSON.parse(response);
                         generarPDF(info.cod_cliente, info.no_factura);
+                        location.reload();
+                    } else {
+                        console.log('no data');
+                    }
+                },
+                error: function (error) {
+                }
+            })
+        }
+    });
+
+    /* ======    Facturar Venta A Ticket    ======*/
+    $('#btn_ticket_venta').click(function (e) {
+        e.preventDefault();
+
+        var rows = $('#detalle_venta tr').length;
+        if (rows > 0) {
+            var action = 'procesarVenta';
+            var codcliente = $('#idcliente').val();
+
+            $.ajax({
+                url: 'ajax.php',
+                type: "POST",
+                async: true,
+                data: { action: action, codcliente: codcliente },
+
+                success: function (response) {
+
+                    if (response != 'error') {
+                        var info = JSON.parse(response);
+                        generarTICKET(info.cod_cliente, info.no_factura);
                         location.reload();
                     } else {
                         console.log('no data');
@@ -425,6 +456,14 @@ $(document).ready(function () {
         generarPDF(codCliente, noFactura);
     });
 
+    //  Ver Ticket
+    $('.view_ticket').click(function (e) {
+        e.preventDefault();
+        var codCliente = $(this).attr('cl');
+        var noFactura = $(this).attr('f');
+        generarTICKET(codCliente, noFactura);
+    });
+
 }); //  End Ready
 
 
@@ -466,6 +505,19 @@ function generarPDF(cliente, factura) {
     var y = parseInt((window.screen.height / 2) - (alto / 2));
 
     $url = 'factura/factura.php?cl=' + cliente + '&f=' + factura;
+    window.open($url, "Factura", "left=" + x + ", top=" + y + ", heigth=" + alto + ", whidth=" + ancho + ", scrollbar=si, location=no, resizable=si, menubar=si");
+}
+
+//  Generar y centrar TICKET
+function generarTICKET(cliente, factura) {
+    var ancho = 1000;
+    var alto = 800;
+
+    //  Calcular posicion x, y para centrar la ventana
+    var x = parseInt((window.screen.width / 2) - (ancho / 2));
+    var y = parseInt((window.screen.height / 2) - (alto / 2));
+
+    $url = 'ticket_fpdf/ticket.php?cl=' + cliente + '&f=' + factura;
     window.open($url, "Factura", "left=" + x + ", top=" + y + ", heigth=" + alto + ", whidth=" + ancho + ", scrollbar=si, location=no, resizable=si, menubar=si");
 }
 
@@ -517,8 +569,10 @@ function del_product_detalle(correlativo) {
 function viewProcesar() {
     if ($('#detalle_venta tr').length > 0) {
         $('#btn_facturar_venta').show();
+        $('#btn_ticket_venta').show();
     } else {
         $('#btn_facturar_venta').hide();
+        $('#btn_ticket_venta').hide();
     }
 }
 

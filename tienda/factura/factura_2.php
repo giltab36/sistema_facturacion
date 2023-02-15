@@ -49,7 +49,7 @@ if (empty($_REQUEST['cl']) || empty($_REQUEST['f'])) {
 	}
 }
 
-ob_start();
+/* ob_start(); */
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +67,7 @@ ob_start();
 			<tr>
 				<td class="logo_factura">
 					<div>
-						<img src="img/logo.png">
+						<img src="./img/logo.png">
 					</div>
 				</td>
 				<td class="info_empresa">
@@ -191,7 +191,7 @@ ob_start();
 					<td class="textright"><span><?php echo $impuesto; ?></span></td>
 				</tr>
 				<tr>
-					<td colspan="3" class="textright"><span>TOTAL G.</span></td>
+					<td colspan="3" class="textright"><span>TOTAL Q.</span></td>
 					<td class="textright"><span><?php echo $total; ?></span></td>
 				</tr>
 			</tfoot>

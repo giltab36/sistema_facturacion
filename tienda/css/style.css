@@ -194,7 +194,7 @@ nav a {
 }
 
 nav .principal>a {
-    background: url(../images/arrow_bottom.png) no-repeat;
+    background: url(../img/arrow_bottom.png) no-repeat;
     background-position-x: 0%;
     background-position-y: 0%;
     background-size: auto auto;
@@ -753,8 +753,9 @@ table td {
     margin: 0 10px;
 }
 
-h5 {
+.h5 {
     color: silver;
+    text-align: center;
 }
 
 .form_search_date .btn_view {

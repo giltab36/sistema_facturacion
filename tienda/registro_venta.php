@@ -71,7 +71,8 @@ include "../conexion.php";
                     <label><b>Acciones</b></label>
                     <div id="acciones_venta">
                         <a href="#" class="btn_cancel textcenter" id="btn_anular_venta"><i class="fas fa-ban"></i> Anular</a>
-                        <a href="#" class="btn_new textcenter" id="btn_facturar_venta" style="display: none;"><i class="far fa-edit"></i> Procesar</a>
+                        <a href="#" class="btn_new textcenter" id="btn_facturar_venta" style="display: none;"><i class="far fa-edit"></i> Factura</a>
+                        <a href="#" class="btn_new textcenter" id="btn_ticket_venta" style="display: none;"><i class="far fa-edit"></i> Ticket</a>
                     </div>
                 </div>
             </div>
