@@ -8,7 +8,6 @@ if (empty($_SESSION['active'])) {
 
 <header>
     <div class="header">
-
         <h1 class="encabezado"><?php echo $nombreEmpresa; ?></h1>
         <div class="optionsBar">
             <p class="fecha">Paraguay, <?php echo fechaC(); ?></p>
