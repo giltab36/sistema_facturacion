@@ -72,7 +72,7 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
             <button type="submit" class="btn_search"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
 
-        <div>
+        <!-- <div>
             <h5 class="h5">Busqueda por Fecha</h5>
             <form action="buscar_venta.php" method="GET" class="form_search_date">
                 <label for="fecha_de">De: </label>
@@ -81,7 +81,7 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
                 <input type="date" name="fecha_a" id="fecha_a" value="<?php echo $fecha_a; ?>">
                 <button type="submit" class="btn_view"><i class="fas fa-search"></i></button>
             </form>
-        </div>
+        </div> -->
 
         <table>
             <tr>

@@ -464,9 +464,123 @@ $(document).ready(function () {
         generarTICKET(codCliente, noFactura);
     });
 
-}); //  End Ready
+    //  Cambiar Contraseña
+    $('.newPass').keyup(function (e) {
+        validPass();
+    });
+
+    //  Form Cambio de contraseña
+    $('#formChangePass').submit(function (e) {
+        e.preventDefault();
+        var passActual = $('#txtPassUser').val();
+        var passNuevo = $('#txtNewPassUser').val();
+        var confirmPassNuevo = $('#txtPassConfirm').val();
+        var action = "changePassword";
+
+        if (passNuevo != confirmPassNuevo) {
+            $('.alertChangePass').html('<p style="color: red;">Las contraseñas no coinsiden.</p>');
+            $('.alertChangePass').slideDown();
+            return false;
+        }
+
+        if (passNuevo.length < 6) {
+            $('.alertChangePass').html('<p style="color: red;">La nueva contraseña debe ser de 6 caracteres como mínimo.</p>');
+            $('.alertChangePass').slideDown();
+            return false;
+        }
+
+        $.ajax({
+            url: 'ajax.php',
+            type: "POST",
+            async: true,
+            data: { action: action, passActual: passActual, passNuevo: passNuevo, confirmPassNuevo: confirmPassNuevo },
+
+            success: function (response) {
+                if (response != 'error') {
+                    var info = JSON.parse(response);
+                    if (info.cod == '00') {
+                        $('.alertChangePass').html('<p style="color: green;">' + info.msg + '</p>');
+                        $('#formChangePass')[0].reset();
+                    } else {
+                        $('.alertChangePass').html('<p style="color: red;">' + info.msg + '</p>');
+                    }
+                    $('.alertChangePass').slideDown();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    });
+
+    //  Actualizar datos de la empresa
+    $('#formEmpresa').submit(function (e) {
+        e.preventDefault();
+        var intNit = $('#txtRuc').val();
+        var strNombreEmp = $('#txtNombre').val();
+        var strRSocialEmp = $('#txtRSocial').val();
+        var intTelEmp = $('#txtTelEmpresa').val();
+        var strEmailEmp = $('#txtEmailEmpresa').val();
+        var strDirEmp = $('#txtDirEmpresa').val();
+        var intIva = $('#txtIva').val();
+
+        if (intNit == '' || strNombreEmp == '' || intTelEmp == '' || strEmailEmp == '' || strDirEmp == '' || intIva == '') {
+            $('.alertFormEmpresa').html('<p style="color: red;">Todos los campos son obligatorios.</p>');
+            $('.alertFormEmpresa').slideDown();
+            return false;
+        }
+
+        $.ajax({
+            url: 'ajax.php',
+            type: "POST",
+            async: true,
+            data: $('#formEmpresa').serialize(),
+            beforeSend: function () {
+                $('.alertFormEmrpresa').slideUp();
+                $('.alertFormEmrpresa').html('');
+                $('#formEmpresa input').attr('disabled", disabled');
+            },
+            success: function (response) {
+                var info = JSON.parse(response);
+                if (info.cod == '00') {
+                    $('.alertChangePass').html('<p style="color: green;">' + info.msg + '</p>');
+                    $('.alertFormEmpresa').slideDown();
+                } else {
+                    $('.alertFormEmpresa').html('<p style="color: red;">' + info.msg + '</p>');
+                }
+                $('.alertFormEmpresa').slideDown();
+                $('#formEmpresa input').removeAttr('disabled');
+            },
+            error: function (error) {
+            }
+        });
+    });
 
 
+
+}); //  End Ready   ============================================================================    End Ready   //
+
+
+
+//  Validar Contraseña
+function validPass() {
+    var passNuevo = $('#txtNewPassUser').val();
+    var confirmPassNuevo = $('#txtPassConfirm').val();
+
+    if (passNuevo != confirmPassNuevo) {
+        $('.alertChangePass').html('<p style="color: red;">Las contraseñas no coinsiden.</p>');
+        $('.alertChangePass').slideDown();
+        return false;
+    }
+
+    if (passNuevo.length < 6) {
+        $('.alertChangePass').html('<p style="color: red;">La nueva contraseña debe ser de 6 caracteres como mínimo.</p>');
+        $('.alertChangePass').slideDown();
+        return false;
+    }
+
+    $('.alertChangePass').html('');
+    $('.alertChangePass').slideUp();
+}
 
 //  Anular Factura
 function anularFactura() {

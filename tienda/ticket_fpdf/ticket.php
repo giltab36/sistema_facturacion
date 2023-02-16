@@ -65,7 +65,7 @@ if ($result_config > 0) {
     $pdf->SetTextColor(0, 0, 0);
     $pdf->MultiCell(0, 5, utf8_decode(strtoupper($configuracion['nombre'])), 0, 'C', false);
     $pdf->SetFont('Arial', '', 9);
-    $pdf->MultiCell(0, 5, utf8_decode("RUC:" . $configuracion['ruc']), 0, 'C', false);
+    $pdf->MultiCell(0, 5, utf8_decode("RUC: " . $configuracion['ruc']), 0, 'C', false);
     $pdf->MultiCell(0, 5, utf8_decode($configuracion['direccion']), 0, 'C', false);
     $pdf->MultiCell(0, 5, utf8_decode("Teléfono: " . $configuracion['telefono']), 0, 'C', false);
     $pdf->MultiCell(0, 5, utf8_decode("Email: " . $configuracion['email']), 0, 'C', false);

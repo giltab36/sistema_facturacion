@@ -864,6 +864,7 @@ table td {
 .dashboard p {
     /* color: #2c9ae4; */
     color: silver;
+    font-size: 15pt;
 }
 
 .dashboard a span {
@@ -956,3 +957,7 @@ table td {
     margin-bottom: 10px;
 }
 
+.alertChangePass {
+    text-align: center;
+    font-weight: bold;
+}

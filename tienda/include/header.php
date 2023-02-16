@@ -9,7 +9,7 @@ if (empty($_SESSION['active'])) {
 <header>
     <div class="header">
 
-        <h1 class="encabezado">Tech Reformation</h1>
+        <h1 class="encabezado"><?php echo $nombreEmpresa; ?></h1>
         <div class="optionsBar">
             <p class="fecha">Paraguay, <?php echo fechaC(); ?></p>
             <span>|</span>
@@ -23,6 +23,6 @@ if (empty($_SESSION['active'])) {
 
 <div class="modal">
     <div class="bodyModal">
-    
+
     </div>
 </div>

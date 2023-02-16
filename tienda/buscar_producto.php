@@ -81,7 +81,7 @@ include "../conexion.php";
                         </select>
                     </b></th>
                 <th><b>Foto</b></th>
-                <th><b>Opciones</b></th>
+                <th class="textcenter"><b>Opciones</b></th>
             </tr>
             <?php
             //Paginador
@@ -124,7 +124,7 @@ include "../conexion.php";
                         <td class="img_producto"><img src="<?php echo $foto ?>" alt="<?php echo $data['descripcion'] ?>"></td>
 
                         <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
-                            <td>
+                            <td class="textcenter">
                                 <a href="#" product="<?php echo $data['cod_producto']; ?>" class="link_add add_product"><i class="fa-solid fa-plus"></i> Agregar</a>
                                 |
                                 <a href="editar_producto.php?id=<?php echo $data['cod_producto'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i> Editar</a>

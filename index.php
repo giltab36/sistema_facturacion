@@ -18,7 +18,9 @@ if (!empty($_SESSION['active'])) {
             $user = mysqli_real_escape_string($conection, $_POST['usuario']);
             $pass = md5(mysqli_real_escape_string($conection, $_POST['clave']));
 
-            $query = mysqli_query($conection, "SELECT * FROM usuario WHERE usuario = '$user' AND clave = '$pass' AND estatus = 1");
+            $query = mysqli_query($conection, "SELECT u.id_usuario, u.nombre, u.correo, u.usuario, u.estatus, u.rol, r.rol AS n_rol FROM usuario u
+                                                INNER JOIN rol r ON u.rol = r.id_rol
+                                                WHERE u.usuario = '$user' AND u.clave = '$pass' AND u.estatus = 1");
             mysqli_close($conection);
             $result = mysqli_num_rows($query);
 
@@ -31,6 +33,7 @@ if (!empty($_SESSION['active'])) {
 
                 $_SESSION['user'] = $data['usuario'];
                 $_SESSION['rol'] = $data['rol'];
+                $_SESSION['Nrol'] = $data['n_rol'];
 
                 header('location: tienda/');
             } else {
@@ -65,7 +68,7 @@ if (!empty($_SESSION['active'])) {
 
             <input type="text" name="usuario" placeholder="Usuario">
             <input type="password" name="clave" placeholder="Contraseña">
-            <div class="alert"><b><?php echo isset($alert) ? $alert : ''; ?></b></div>
+            <div class="alert" style="color: red;"><b><?php echo isset($alert) ? $alert : ''; ?></b></div>
             <input type="submit" value="Ingresar">
 
         </form>
