@@ -8,8 +8,24 @@
 }
 
 body {
-    /*background: linear-gradient(to right, #47001c, #971132);*/
-    background: linear-gradient(to right, #0e151b, #ec031f, #0e151b);
+    /* background: linear-gradient(to right, #0e151b, #ec031f, #0e151b); */
+    background: linear-gradient(135deg, #008704, #505488, #2F3F80, #161569, #5A4894, #A950A1, #FF7CAE);
+    background-size: 500%;
+    animation: fanimation 10s infinite;
+}
+
+@keyframes fanimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .right {
@@ -113,7 +129,10 @@ header {
 }
 
 .header {
-    background: linear-gradient(to right, #0e151b, #ec031f, #0e151b);
+    /* background: linear-gradient(to right, #0e151b, #ec031f, #0e151b); */
+    background: linear-gradient(135deg, #008704, #505488, #2F3F80, #161569, #5A4894, #A950A1, #FF7CAE);
+    background-size: 500%;
+    animation: fanimation 10s infinite;
     height: 35px;
     display: -webkit-flex;
     display: -moz-flex;
@@ -455,6 +474,10 @@ table td {
     width: 35px;
     text-decoration: none;
     border-radius: 10px 10px 0 0;
+}
+
+.paginador {
+    height: 100%;
 }
 
 .paginador a:hover {
