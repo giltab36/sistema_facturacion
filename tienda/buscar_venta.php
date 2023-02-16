@@ -46,8 +46,20 @@ if (!empty($_REQUEST['fecha_de']) && !empty($_REQUEST['fecha_a'])) {
         $where = "fecha BETWEEN '$f_de' AND '$f_a'";
         $buscar = "fecha_de=$fecha_de&fecha_a=$fecha_a";
     }
-}else{
+} else {
     header("location: lista_venta.php");
+}
+
+//	Datos de la Empresa
+$nombreEmpresa = '';
+
+$query_empresa = mysqli_query($conection, "SELECT nombre FROM configuracion");
+$row_empesa = mysqli_num_rows($query_empresa);
+
+if ($row_empesa > 0) {
+    while ($arrayInfoEmpresa  = mysqli_fetch_assoc($query_empresa)) {
+        $nombreEmpresa = $arrayInfoEmpresa['nombre'];
+    }
 }
 ?>
 <!DOCTYPE html>

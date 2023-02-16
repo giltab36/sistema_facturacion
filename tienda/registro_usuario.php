@@ -24,7 +24,6 @@ if (!empty($_POST)) {
             $alert = '<p class="msg_error">El correo o el usuario ya existe.</p>';
         } else {
             $query_insert = mysqli_query($conection, "INSERT INTO usuario (nombre, correo, usuario, clave, rol) VALUE ('$nombre', '$email', '$user', '$pass', '$rol')");
-            mysqli_close($conection);
 
             if ($query_insert) {
                 $alert = '<p class="msg_save">Usuario creado correctamente.</p>';
@@ -35,6 +34,17 @@ if (!empty($_POST)) {
     }
 }
 
+//	Datos de la Empresa
+$nombreEmpresa = '';
+
+$query_empresa = mysqli_query($conection, "SELECT nombre FROM configuracion");
+$row_empesa = mysqli_num_rows($query_empresa);
+
+if ($row_empesa > 0) {
+	while ($arrayInfoEmpresa  = mysqli_fetch_assoc($query_empresa)) {
+		$nombreEmpresa = $arrayInfoEmpresa['nombre'];
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,7 +103,10 @@ if (!empty($_POST)) {
 
 
 
-    <?php include "include/footer.php"; ?>
+    <?php 
+    include "include/footer.php"; 
+    mysqli_close($conection);
+    ?>
 </body>
 
 </html>

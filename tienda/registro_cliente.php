@@ -32,9 +32,19 @@ if (!empty($_POST)) {
             }
         }
     }
-    mysqli_close($conection);
 }
 
+//	Datos de la Empresa
+$nombreEmpresa = '';
+
+$query_empresa = mysqli_query($conection, "SELECT nombre FROM configuracion");
+$row_empesa = mysqli_num_rows($query_empresa);
+
+if ($row_empesa > 0) {
+    while ($arrayInfoEmpresa  = mysqli_fetch_assoc($query_empresa)) {
+        $nombreEmpresa = $arrayInfoEmpresa['nombre'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +85,10 @@ if (!empty($_POST)) {
 
 
 
-    <?php include "include/footer.php"; ?>
+    <?php
+    include "include/footer.php"; 
+    mysqli_close($conection);
+    ?>
 </body>
 
 </html>

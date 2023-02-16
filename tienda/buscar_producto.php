@@ -2,6 +2,17 @@
 session_start();
 include "../conexion.php";
 
+//	Datos de la Empresa
+$nombreEmpresa = '';
+
+$query_empresa = mysqli_query($conection, "SELECT nombre FROM configuracion");
+$row_empesa = mysqli_num_rows($query_empresa);
+
+if ($row_empesa > 0) {
+    while ($arrayInfoEmpresa  = mysqli_fetch_assoc($query_empresa)) {
+        $nombreEmpresa = $arrayInfoEmpresa['nombre'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +36,7 @@ include "../conexion.php";
 
         if (!empty($_REQUEST['busqueda'])) {
             $busqueda = strtolower($_REQUEST['busqueda']);
-            $where = "(pto.cod_barra LIKE '%$busqueda%' OR pto.descripcion LIKE '%$busqueda%') AND pto.estatus = 1";
+            $where = "(pto.precio LIKE '%$busqueda%' OR pto.descripcion LIKE '%$busqueda%') AND pto.estatus = 1";
             $buscar = 'busqueda=' . $busqueda;
         }
 

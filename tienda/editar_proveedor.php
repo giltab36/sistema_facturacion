@@ -39,7 +39,6 @@ if (empty($_REQUEST['id'])) {
 
 $idproveedor = $_REQUEST['id'];
 $sql = mysqli_query($conection, "SELECT * FROM proveedor WHERE cod_proveedor = $idproveedor AND estatus = 1");
-mysqli_close($conection);
 $result_sql = mysqli_num_rows($sql);
 
 if ($result_sql == 0) {
@@ -55,6 +54,17 @@ if ($result_sql == 0) {
     }
 }
 
+//	Datos de la Empresa
+$nombreEmpresa = '';
+
+$query_empresa = mysqli_query($conection, "SELECT nombre FROM configuracion");
+$row_empesa = mysqli_num_rows($query_empresa);
+
+if ($row_empesa > 0) {
+	while ($arrayInfoEmpresa  = mysqli_fetch_assoc($query_empresa)) {
+		$nombreEmpresa = $arrayInfoEmpresa['nombre'];
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +106,10 @@ if ($result_sql == 0) {
 
 
 
-    <?php include "include/footer.php"; ?>
+    <?php 
+    include "include/footer.php"; 
+    mysqli_close($conection);
+    ?>
 </body>
 
 </html>
