@@ -8,13 +8,13 @@
 }
 
 body {
-    /* background: linear-gradient(to right, #0e151b, #ec031f, #0e151b); */
-    background: linear-gradient(135deg, #008704, #505488, #2F3F80, #161569, #5A4894, #A950A1, #FF7CAE);
+    background: linear-gradient(to right, #0e151b, #ec031f, #0e151b);
+    /* background: linear-gradient(135deg, #016d04, #3d3f68, #2F3F80, #0f0e44, #362c5a, #753870, #a04d6d);
     background-size: 500%;
-    animation: fanimation 10s infinite;
+    animation: fanimation 10s infinite; */
 }
 
-@keyframes fanimation {
+/* @keyframes fanimation {
     0% {
         background-position: 0% 50%;
     }
@@ -26,7 +26,7 @@ body {
     100% {
         background-position: 0% 50%;
     }
-}
+} */
 
 .right {
     transform: translateY(-200px)
@@ -129,10 +129,10 @@ header {
 }
 
 .header {
-    /* background: linear-gradient(to right, #0e151b, #ec031f, #0e151b); */
-    background: linear-gradient(135deg, #008704, #505488, #2F3F80, #161569, #5A4894, #A950A1, #FF7CAE);
+    background: linear-gradient(to right, #0e151b, #ec031f, #0e151b);
+    /* background: linear-gradient(135deg, #008704, #505488, #2F3F80, #161569, #5A4894, #A950A1, #FF7CAE);
     background-size: 500%;
-    animation: fanimation 10s infinite;
+    animation: fanimation 10s infinite; */
     height: 35px;
     display: -webkit-flex;
     display: -moz-flex;
