@@ -10,9 +10,9 @@ $query_empresa = mysqli_query($conection, "SELECT nombre FROM configuracion");
 $row_empesa = mysqli_num_rows($query_empresa);
 
 if ($row_empesa > 0) {
-	while ($arrayInfoEmpresa  = mysqli_fetch_assoc($query_empresa)) {
-		$nombreEmpresa = $arrayInfoEmpresa['nombre'];
-	}
+    while ($arrayInfoEmpresa  = mysqli_fetch_assoc($query_empresa)) {
+        $nombreEmpresa = $arrayInfoEmpresa['nombre'];
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -33,7 +33,7 @@ if ($row_empesa > 0) {
         <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
             <a href="registro_producto.php" class="btn_new"><i class="fa-solid fa-truck-ramp-box"></i> Agregar Producto</a>
         <?php } ?>
-        
+
         <form action="buscar_producto.php" method="GET" class="form_search">
             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
             <button type="submit" class="btn_search"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -66,7 +66,9 @@ if ($row_empesa > 0) {
                             </b></select>
                     </b></th>
                 <th><b>Foto</b></th>
-                <th class="textcenter"><b>Opciones</b></th>
+                <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
+                    <th scope=""><b>Opciones</b></th>
+                <?php } ?>
             </tr>
             <?php
             //Paginador

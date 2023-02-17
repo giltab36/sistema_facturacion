@@ -10,9 +10,9 @@ $query_empresa = mysqli_query($conection, "SELECT nombre FROM configuracion");
 $row_empesa = mysqli_num_rows($query_empresa);
 
 if ($row_empesa > 0) {
-	while ($arrayInfoEmpresa  = mysqli_fetch_assoc($query_empresa)) {
-		$nombreEmpresa = $arrayInfoEmpresa['nombre'];
-	}
+    while ($arrayInfoEmpresa  = mysqli_fetch_assoc($query_empresa)) {
+        $nombreEmpresa = $arrayInfoEmpresa['nombre'];
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -84,7 +84,7 @@ if ($row_empesa > 0) {
                         <td><?php echo $data['direccion'] ?></td>
                         <td>
                             <a href="editar_cliente.php?id=<?php echo $data['id_cliente'] ?>" class="link_edit"><i class="fa-regular fa-pen-to-square"></i>Editar</a>
-                            <?php if ($_SESSION['rol'] == 1 /*|| $_SESSION['rol'] == 2*/) { ?>
+                            <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
                                 |
                                 <a href="eliminar_cliente.php?id=<?php echo $data['id_cliente'] ?>" class="link_delete"><i class="fa-regular fa-trash-can"></i> Eliminar</a>
                             <?php } ?>

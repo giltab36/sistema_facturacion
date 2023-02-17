@@ -46,7 +46,9 @@ if ($row_empesa > 0) {
                 <th scope=""><b>Contacto</b></th>
                 <th scope=""><b>Teléfono</b></th>
                 <th scope=""><b>Dirección</b></th>
-                <th scope=""><b>Opciones</b></th>
+                <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
+                    <th scope=""><b>Opciones</b></th>
+                <?php } ?>
             </tr>
             <?php
             //Paginador
