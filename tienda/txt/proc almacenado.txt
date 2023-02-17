@@ -198,7 +198,7 @@ DELIMITER $$
 		SELECT COUNT(*) INTO clientes FROM cliente WHERE estatus !=10;
 		SELECT COUNT(*) INTO proveedores FROM proveedor WHERE estatus !=10;
 		SELECT COUNT(*) INTO productos FROM producto WHERE estatus !=10;
-		SELECT COUNT(*) INTO ventas FROM factura WHERE estatus !=10;
+		SELECT COUNT(*) INTO ventas FROM factura WHERE fecha > CURDATE() AND estatus !=10;
 
 		SELECT usuarios, clientes, proveedores, productos, ventas;
 
