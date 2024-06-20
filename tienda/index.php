@@ -9,7 +9,7 @@ $razonSocial = '';
 $telEmpresa = '';
 $emailEmpresa = '';
 $dirEmpresa = '';
-$iva;
+$iva = '';
 
 $query_empresa = mysqli_query($conection, "SELECT * FROM configuracion");
 $row_empesa = mysqli_num_rows($query_empresa);
@@ -23,6 +23,18 @@ if ($row_empesa > 0) {
 		$emailEmpresa = $arrayInfoEmpresa['email'];
 		$dirEmpresa = $arrayInfoEmpresa['direccion'];
 		$iva = $arrayInfoEmpresa['iva'];
+	}
+}
+
+//Datos del movimiento monetario
+$monto = '';
+
+$query_monto = mysqli_query($conection, "SELECT SUM(total_factura) as monto FROM factura WHERE estatus = 1");
+$row_monto = mysqli_num_rows($query_monto);
+
+if ($row_monto > 0) {
+	while ($arrayInfoMonto  = mysqli_fetch_assoc($query_monto)) {
+		$monto = $arrayInfoMonto['monto'];
 	}
 }
 
@@ -90,8 +102,18 @@ if ($result_dash > 0) {
 						<span><?php echo $data_dash['ventas']; ?></span>
 					</p>
 				</a>
+				<?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
+					<a href="lista_usuario.php">
+						<i class="fa-solid fa-sack-dollar"></i>
+						<p>
+							<strong>Monto Actual</strong><br>
+							<span>₲. <?php echo $monto; ?></span>
+						</p>
+					</a>
+				<?php } ?>
 			</div>
 		</div>
+
 		<!-- DATOS DEL SISTEMA -->
 		<div class="divInfoSistema">
 			<h1 class="title titlePanelControl">Configuración</h1>
@@ -139,6 +161,7 @@ if ($result_dash > 0) {
 						</form>
 					</div>
 				<?php } ?>
+
 				<!-- DATOS DEL USUARIO -->
 				<div class="containerDataUser">
 					<div class="logoUser">
