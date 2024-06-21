@@ -150,7 +150,6 @@ if ($row_empesa > 0) {
 
     <?php 
     include "include/footer.php"; 
-    mysqli_close($conection);
     ?>
 </body>
 
